@@ -5,7 +5,7 @@
 	Daniël Zwijnenburg
 	45north
 
-This plugin allows you to easily add the Growl-like notification plugin for JQuery called 'gritter'.
+This Ruby on Rails plugin allows you to easily add Growl-like notifications to your application using a JQuery plugin called 'gritter'.
 
 ## Installation
 
