@@ -70,6 +70,15 @@ module Gritter
       extended.to_s
     end
     
+    def gflash *args
+      flashes = []
+      session[:gflash].each_key do |key|
+        flashes.push(js add_gritter(session[:gflash][key], :image => key, :title => TITLES[key]))
+      end
+      session[:gflash] = nil
+      flashes.to_s      
+    end
+    
     def js script
       "<script type=\"text/javascript\">//<![CDATA[\n#{script};\n//]]></script>"
     end

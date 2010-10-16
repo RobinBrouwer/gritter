@@ -1,4 +1,5 @@
 require 'gritter/helpers'
+require 'gritter/gflash'
 
 module Gritter
   def self.install_gritter
@@ -36,5 +37,6 @@ end
 
 if defined?(Rails) && defined?(ActionController)
   ActionController::Base.send(:helper, Gritter::Helpers)
+  ActionController::Base.send(:include, Gritter::Gflash)
   Gritter.install_gritter
 end
