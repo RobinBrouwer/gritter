@@ -1,6 +1,6 @@
 # gritter
 
-	version 0.1
+	version 0.2
 	Robin Brouwer
 	Daniël Zwijnenburg
 	45north
@@ -13,16 +13,10 @@ Install the plugin with the following command:
 
 	script/plugin install git://github.com/RobinBrouwer/gritter.git
 
-
-## Start server
-
 Start your server and you'll see that three folders are added to your /javascripts, /stylesheets and /images folders.
 Now you can use gritter inside your Rails application.
 
-
-## Include Javascripts and Stylesheets
-
-Add the following to your head-tag inside the layout:
+Now add the following to your head-tag inside the layout:
 
 	<%= include_gritter %>
 
@@ -30,17 +24,36 @@ If you also want to add JQuery together with gritter (from googleapis.com) you c
 
 	<%= include_gritter_and_jquery %>
 
+You can pass extra arguments to these functions to set the default options for gritter.
+
+	:fade_in_speed => "medium"            # => Allows you to set the fade-in-speed. Can be string or integer (in ms).
+	:fade_out_speed => 1000               # => Allows you to set the fade-out-speed. Must be an integer (in ms).
+	:time => 8000                         # => Allows you to set the time the notification stays. Must be an integer (in ms).
+
 
 ## Usage
 
-To use gritter just use the following helper:
+There are several helpers you can use with gritter. All of them print out javascript code without script-tags.
 
-	<%= gritter("This is a notification just for you!") %>
+	add_gritter
+	remove_gritter
+	extend_gritter
+	
+To add the script-tags we added another function called 'js'. It allows you to easily add script-tags around your javascript.
+It can be used in combination with gritter, but also other javascript you want to output. 
+It automatically adds a semicolon (;) at the end of the script-tag, so you don't have to worry about that.
 
-The gritter helper allows you to easily set the text for the notification. 
+
+### add_gritter
+
+The add_gritter helper allows you to add a gritter notification to your application. It works like this in the link_to_function helper:
+
+	<%= link_to_function "Notify", add_gritter("This is a notification just for you!") %>
+
+The add_gritter helper allows you to easily set the text for the notification. 
 When you want to change the title, just pass the :title argument to the helper:
 
-	<%= gritter("This is a notification just for you!", :title => "Please pay attention!") %>
+	<%= link_to_function "Notify", add_gritter("This is a notification just for you!", :title => "Please pay attention!") %>
 
 There are many more arguments you can pass to the helper:
 
@@ -62,14 +75,34 @@ The :image argument also allows you to easily set five different images:
 	:error
 	:progress
 
-It works like this in combination with flash[:notice]:
+It works like this in combination with flash[:notice] and the 'js' helper:
 
-	<%= gritter(flash[:notice], :image => :notice, :title => "Pay attention!", :sticky => true) %>
+	<%= js gritter(flash[:notice], :image => :notice, :title => "Pay attention!", :sticky => true) %>
 
 And that's it! You just added Growl-like notifications to your Rails application.
-It's great for all the different flash notifications you want to show to your users.
+It's great for all kinds of notifications, including the flash notifications you want to show to your users.
 
-Have fun with it!
+
+### remove_gritter
+
+The remove_gritter helper removes all gritter notifications from the screen. 
+
+	<%= link_to_function "Remove notifications", remove_gritter %>
+
+You can pass two extra arguments to this helper.
+
+	:before_close => "alert('Closing!');"  # => Execute javascript before closing.
+	:after_close => "alert('Closed!');"    # => Execute javascript after closing.
+
+You can also use the 'js' helper to add script-tags around this helper.
+
+
+### extend_gritter
+
+The extend_gritter helper allows you to set the default gritter options, just like you can do with the include_gritter helpers. 
+To see what arguments you can pass to this helper just check the include_gritter helper.
+
+You can also use the 'js' helper to add script-tags around this helper.
 
 
 ## Special Thanks
