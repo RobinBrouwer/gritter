@@ -1,6 +1,6 @@
 # gritter
 
-	version 0.2
+	version 0.3
 	Robin Brouwer
 	Daniël Zwijnenburg
 	45north
@@ -42,6 +42,8 @@ There are several helpers you can use with gritter. All of them print out javasc
 To add the script-tags we added another function called 'js'. It allows you to easily add script-tags around your javascript.
 It can be used in combination with gritter, but also other javascript you want to output. 
 It automatically adds a semicolon (;) at the end of the script-tag, so you don't have to worry about that.
+
+Since version 0.3 we also added a gflash helper. You can read more about this helper below.
 
 
 ### add_gritter
@@ -103,6 +105,46 @@ The extend_gritter helper allows you to set the default gritter options, just li
 To see what arguments you can pass to this helper just check the include_gritter helper.
 
 You can also use the 'js' helper to add script-tags around this helper.
+
+
+### gflash
+
+The gflash helper is a different kind of flash[:notice] message. It uses the add_gritter helper and the default images used in this plugin.
+It uses a session to remember the flash messages. Add the following inside your controller action:
+
+	def create
+		...
+		gflash :success => "The product has been successfully created!"
+		...
+	end
+
+Now you can add the following to your layout view inside the body-tag:
+
+	<%= gflash %>
+	
+The flash-message will be shown with 'success.png' as the image and 'Success' as the title.
+To change the title you can add the following to the gflash helper inside the layout:
+
+	<%= gflash :success => "It has been successful!" %>
+	
+Now the default title will be overwritten. You can use the following gflash options:
+
+	:success
+	:warning
+	:notice
+	:error
+	:progress
+
+Each uses the corresponding image and title. You can also add multiple gritter notifications at once:
+
+	def create
+		...
+		gflash :success => "The product has been successfully created!", :notify => "This product doesn't have a category."
+		...
+	end
+
+Just remember that you can only set the gflash message inside the controller. 
+The gflash helper inside the views will show the notification and change the title. It will not change the message.
 
 
 ## Special Thanks

@@ -5,6 +5,7 @@ module Gritter
     ERROR = "/images/gritter/error.png"
     NOTICE = "/images/gritter/notice.png"
     PROGRESS = "/images/gritter/progress.gif"
+    @@titles = { :success => "Success", :warning => "Warning", :error => "Error", :notice => "Notice", :progress => "Progress" }
     
     def include_gritter *args
       options = args.extract_options!
@@ -71,12 +72,25 @@ module Gritter
     end
     
     def gflash *args
-      flashes = []
-      session[:gflash].each_key do |key|
-        flashes.push(js add_gritter(session[:gflash][key], :image => key, :title => TITLES[key]))
+      options = args.extract_options!
+      options.each do |option|
+        @@titles[option[0]] = option[1] if @@titles.has_key?(option[0])
       end
-      session[:gflash] = nil
-      flashes.to_s      
+      if session[:gflash].present?
+        flashes = []
+        session[:gflash].each_key do |key|
+          flashes.push(js add_gritter(session[:gflash][key], :image => key, :title => @@titles[key]))
+        end
+        session[:gflash] = nil
+        flashes.to_s
+      end
+    end
+    
+    def gflash_titles *args
+      options = args.extract_options!
+      options.each do |option|
+        @@titles[option[0]] = option[1]
+      end
     end
     
     def js script
