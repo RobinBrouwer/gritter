@@ -71,7 +71,7 @@ module Gritter
     end
     
     def js script
-      "<script type=\"text/javascript\">#{script};</script>"
+      "<script type=\"text/javascript\">//<![CDATA[#{script};//]]></script>"
     end
   end
 end
