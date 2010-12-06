@@ -4,7 +4,7 @@ module Gritter
       session[:gflash] ||= {}
       options = args.extract_options!
       options.each do |option|
-        session[:gflash][option[0]] = option[1] 
+        session[:gflash][option.first] = option.second
       end
     end
   end
