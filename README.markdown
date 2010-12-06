@@ -1,6 +1,6 @@
 # gritter
 
-	version 0.3
+	version 0.4
 	Robin Brouwer
 	Daniël Zwijnenburg
 	45north
@@ -12,6 +12,10 @@ This Ruby on Rails plugin allows you to easily add Growl-like notifications to y
 Install the plugin with the following command:
 
 	script/plugin install git://github.com/RobinBrouwer/gritter.git
+
+This plugin can be used with Rails 3. When you're using Rails 2 you should use version 0.3:
+
+	https://github.com/RobinBrouwer/gritter/tree/v0.3
 
 Start your server and you'll see that three folders are added to your /javascripts, /stylesheets and /images folders.
 Now you can use gritter inside your Rails application.
