@@ -13,14 +13,14 @@ module Gritter
       includes.push(stylesheet_link_tag("gritter/jquery.gritter.css")+"\n")
       includes.push(javascript_include_tag("gritter/jquery.gritter.min.js")+"\n")
       includes.push(js(extend_gritter(options))) if options.present?
-      includes.to_s.html_safe
+      includes.join.html_safe
     end
     
     def include_gritter_and_jquery *args
       includes = []
       includes.push(javascript_include_tag("http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js")+"\n")
       includes.push(include_gritter(*args))
-      includes.to_s.html_safe
+      includes.join.html_safe
     end
     
     def add_gritter text, *args
@@ -46,7 +46,7 @@ module Gritter
       notification.push("title: '#{escape_javascript(title)}',")
       notification.push("text: '#{escape_javascript(text)}'")
       notification.push("})")
-      text.present? ? notification.to_s.html_safe : nil
+      text.present? ? notification.join.html_safe : nil
     end
     
     def remove_gritter *args
@@ -56,7 +56,7 @@ module Gritter
       removed.push("before_close: function(e){ #{options[:before_close]} },") if options[:before_close].present?
       removed.push("after_close: function(){ #{options[:after_close]} },") if options[:after_close].present?
       removed.push("})")
-      removed.to_s.html_safe
+      removed.join.html_safe
     end
     
     def extend_gritter *args
@@ -68,7 +68,7 @@ module Gritter
       extended.push("fade_out_speed: #{options[:fade_out_speed]}, ") if options[:fade_out_speed].present?
       extended.push("time: #{options[:time]}") if options[:time].present?
       extended.push("})")
-      extended.to_s.html_safe
+      extended.join.html_safe
     end
     
     def gflash *args
@@ -82,7 +82,7 @@ module Gritter
           flashes.push(js add_gritter(session[:gflash][key], :image => key, :title => @@titles[key]))
         end
         session[:gflash] = nil
-        flashes.to_s.html_safe
+        flashes.join.html_safe
       end
     end
     
