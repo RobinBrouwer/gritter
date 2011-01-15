@@ -44,14 +44,15 @@ The :fade_in_speed and :fade_out_speed options accept the following Strings:
 ## v0.5 changes
 
 I have made several changes in version 0.5:
-- Works with Ruby 1.9 now (the Array.to_s was causing problems);
-- Refactored a lot of code to make everything a bit more logical;
-- The js helper doesn't add a semicolon (;) after the script anymore;
-- The js helper accepts several scripts as options;
-- Changed the way linebreaks (\n) are created;
-- Added an 'e' variable for all the callbacks;
-- Added String support for :fade_out_speed;
-- Changed the README.
+
+	- Works with Ruby 1.9 now (the Array.to_s was causing problems);
+	- Refactored a lot of code to make everything a bit more logical;
+	- The js helper doesn't add a semicolon (;) after the script anymore;
+	- The js helper accepts several scripts as options;
+	- Changed the way linebreaks (\n) are created;
+	- Added an 'e' variable for all the callbacks;
+	- Added String support for :fade_out_speed;
+	- Changed the README.
 
 
 ## Upcoming changes
