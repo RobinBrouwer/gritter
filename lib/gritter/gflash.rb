@@ -3,8 +3,8 @@ module Gritter
     def gflash *args
       session[:gflash] ||= {}
       options = args.extract_options!
-      options.each do |option|
-        session[:gflash][option.first] = option.second
+      options.each do |key, value|
+        session[:gflash][key] = value
       end
     end
   end

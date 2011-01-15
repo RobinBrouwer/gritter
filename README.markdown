@@ -1,11 +1,11 @@
 # gritter
 
-	version 0.4
+	version 0.5
 	Robin Brouwer
 	Daniël Zwijnenburg
 	45north
 
-This Ruby on Rails plugin allows you to easily add Growl-like notifications to your application using a JQuery plugin called 'gritter'.
+This Ruby on Rails plugin allows you to easily add Growl-like notifications to your application using a jQuery plugin called 'gritter'.
 
 ## Installation
 
@@ -24,49 +24,74 @@ Now add the following to your head-tag inside the layout:
 
 	<%= include_gritter %>
 
-If you also want to add JQuery together with gritter (from googleapis.com) you can use the following helper:
+If you also want to add jQuery together with gritter (from googleapis.com) you can use the following helper:
 
 	<%= include_gritter_and_jquery %>
 
 You can pass extra arguments to these functions to set the default options for gritter.
 
-	:fade_in_speed => "medium"            # => Allows you to set the fade-in-speed. Can be string or integer (in ms).
-	:fade_out_speed => 1000               # => Allows you to set the fade-out-speed. Must be an integer (in ms).
-	:time => 8000                         # => Allows you to set the time the notification stays. Must be an integer (in ms).
+	:fade_in_speed => "medium"            # => Allows you to set the fade-in-speed. Can be String or Integer (in ms).
+	:fade_out_speed => 1000               # => Allows you to set the fade-out-speed. Can be String or Integer (in ms).
+	:time => 8000                         # => Allows you to set the time the notification stays. Must be an Integer (in ms).
+
+The :fade_in_speed and :fade_out_speed options accept the following Strings:
+	
+	"slow"
+	"medium"
+	"fast"
+	
+
+## v0.5 changes
+
+I have made several changes in version 0.5:
+- Works with Ruby 1.9 now (the Array.to_s was causing problems);
+- Refactored a lot of code to make everything a bit more logical;
+- The js helper doesn't add a semicolon (;) after the script anymore;
+- The js helper accepts several scripts as options;
+- Changed the way linebreaks (\n) are created;
+- Added an 'e' variable for all the callbacks;
+- Added String support for :fade_out_speed;
+- Changed the README.
+
+
+## Upcoming changes
+
+One of the features I have in mind for the following release will be locales support for gflash.
+The only thing you need to add in the Controller is what error should be shown and the locales will do the rest.
 
 
 ## Usage
 
-There are several helpers you can use with gritter. All of them print out javascript code without script-tags.
+There are several helpers you can use with gritter. All of them print out Javascript code without script-tags.
 
 	add_gritter
 	remove_gritter
 	extend_gritter
 	
 To add the script-tags we added another function called 'js'. It allows you to easily add script-tags around your javascript.
-It can be used in combination with gritter, but also other javascript you want to output. 
-It automatically adds a semicolon (;) at the end of the script-tag, so you don't have to worry about that.
+It can be used in combination with gritter, but also other Javascript you want to run.
 
 Since version 0.3 we also added a gflash helper. You can read more about this helper below.
 
 
 ### add_gritter
 
-The add_gritter helper allows you to add a gritter notification to your application. It works like this in the link_to_function helper:
+The add_gritter helper allows you to add a gritter notification to your application. 
+It outputs Javascript directly into your template. It works like this inside a js.erb file:
 
-	<%= link_to_function "Notify", add_gritter("This is a notification just for you!") %>
+	<%= add_gritter("This is a notification just for you!") %>
 
 The add_gritter helper allows you to easily set the text for the notification. 
 When you want to change the title, just pass the :title argument to the helper:
 
-	<%= link_to_function "Notify", add_gritter("This is a notification just for you!", :title => "Please pay attention!") %>
+	<%= add_gritter("This is a notification just for you!", :title => "Please pay attention!") %>
 
 There are many more arguments you can pass to the helper:
 
 	:title => "This is a title"            # => Allows you to set the title for the notification.
 	:image => "/images/rails.png"          # => Allows you to add an image to the notification.
 	:sticky => true                        # => Allows you to make the notification sticky.
-	:time => 4000                          # => Allows you to set the time when the notification disappears (in ms)
+	:time => 4000                          # => Allows you to set the time when the notification disappears (in ms).
 	:class_name => "gritter"               # => Allows you to set a different classname.
 	:before_open => "alert('Opening!');"   # => Execute javascript before opening.
 	:after_open => "alert('Opened!');"     # => Execute javascript after opening.
@@ -83,7 +108,14 @@ The :image argument also allows you to easily set five different images:
 
 It works like this in combination with flash[:notice] and the 'js' helper:
 
-	<%= js gritter(flash[:notice], :image => :notice, :title => "Pay attention!", :sticky => true) %>
+	<%= js add_gritter(flash[:notice], :image => :notice, :title => "Pay attention!", :sticky => true) %>
+
+The js helper is almost the same as the javascript_tag helper. The difference is that you can pass several scripts at once.
+You don't need to pass these scripts as an Array. The helper also adds a linebreak (\n) after each script.
+
+	<%= js add_gritter("See my notification"), add_gritter("Another one") %>
+
+It puts all the scripts inside a single script-tag.
 
 And that's it! You just added Growl-like notifications to your Rails application.
 It's great for all kinds of notifications, including the flash notifications you want to show to your users.
@@ -91,9 +123,9 @@ It's great for all kinds of notifications, including the flash notifications you
 
 ### remove_gritter
 
-The remove_gritter helper removes all gritter notifications from the screen. 
+The remove_gritter helper removes all gritter notifications from the screen. You can use it inside a js.erb file:
 
-	<%= link_to_function "Remove notifications", remove_gritter %>
+	<%= remove_gritter %>
 
 You can pass two extra arguments to this helper.
 
@@ -118,7 +150,7 @@ It uses a session to remember the flash messages. Add the following inside your 
 
 	def create
 		...
-		gflash :success => "The product has been successfully created!"
+		gflash :success => "The product has been created successfully!"
 		...
 	end
 
@@ -143,7 +175,7 @@ Each uses the corresponding image and title. You can also add multiple gritter n
 
 	def create
 		...
-		gflash :success => "The product has been successfully created!", :notify => "This product doesn't have a category."
+		gflash :success => "The product has been created successfully!", :notify => "This product doesn't have a category."
 		...
 	end
 
@@ -155,7 +187,7 @@ The gflash helper inside the views will show the notification and change the tit
 
 We'd like to express our gratitude to the following people:
 
-Many thanks to Jordan Boesch, creator of the AWESOME JQuery plugin gritter.
+Many thanks to Jordan Boesch, creator of the AWESOME jQuery plugin gritter.
 http://boedesign.com/blog/2009/07/11/growl-for-jquery-gritter/
 
 Also special thanks to Liam McKay for creating the awesome icons!
