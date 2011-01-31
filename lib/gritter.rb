@@ -7,9 +7,9 @@ module Gritter
     orig_javascripts = File.join(File.dirname(__FILE__), 'gritter', 'assets', 'javascripts')
     orig_stylesheets = File.join(File.dirname(__FILE__), 'gritter', 'assets', 'stylesheets')
     orig_images = File.join(File.dirname(__FILE__), 'gritter', 'assets', 'images')
-    dest_javascripts = File.join(RAILS_ROOT, 'public', 'javascripts', 'gritter')
-    dest_stylesheets = File.join(RAILS_ROOT, 'public', 'stylesheets', 'gritter')
-    dest_images = File.join(RAILS_ROOT, 'public', 'images', 'gritter')
+    dest_javascripts = File.join(Rails.root, 'public', 'javascripts', 'gritter')
+    dest_stylesheets = File.join(Rails.root, 'public', 'stylesheets', 'gritter')
+    dest_images = File.join(Rails.root, 'public', 'images', 'gritter')
     
     gritter = File.join(dest_javascripts, 'jquery.gritter.min.js')
 
