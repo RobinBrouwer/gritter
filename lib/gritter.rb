@@ -2,6 +2,15 @@ require 'gritter/helpers'
 require 'gritter/gflash'
 
 module Gritter
+  def self.initialize
+    return if @initialized
+    raise "ActionController is not available yet." unless defined?(ActionController)
+    ActionController::Base.send(:helper, Gritter::Helpers)
+    ActionController::Base.send(:include, Gritter::Gflash)
+    Gritter.install_gritter
+    @initialized = true
+  end
+  
   def self.install_gritter
     require 'fileutils'
     orig_javascripts = File.join(File.dirname(__FILE__), 'gritter', 'assets', 'javascripts')
@@ -35,8 +44,6 @@ module Gritter
   end
 end
 
-if defined?(Rails) && defined?(ActionController)
-  ActionController::Base.send(:helper, Gritter::Helpers)
-  ActionController::Base.send(:include, Gritter::Gflash)
-  Gritter.install_gritter
+if defined?(Rails::Railtie)
+  require 'gritter/railtie'
 end

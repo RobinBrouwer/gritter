@@ -1,19 +1,23 @@
 # gritter
 
-	version 0.5
+	version 0.5.1
 	Robin Brouwer
 	Daniël Zwijnenburg
 	45north
 
-This Ruby on Rails plugin allows you to easily add Growl-like notifications to your application using a jQuery plugin called 'gritter'.
+This Ruby on Rails gem allows you to easily add Growl-like notifications to your application using a jQuery plugin called 'gritter'.
 
 ## Installation
 
-Install the plugin with the following command:
+You can use this gem by putting the following inside your Gemfile:
+
+	gem "gritter"
+
+You can also install this as a plugin with the following command:
 
 	rails plugin install git://github.com/RobinBrouwer/gritter.git
 
-This is a Rails 3 plugin. When you're using Rails 2 you should use version 0.3:
+This is a Rails 3 gem. When you're using Rails 2 you should use version 0.3 (this is a plugin):
 
 	script/plugin install git://github.com/RobinBrouwer/gritter.git -r 'tag v0.3'
 
