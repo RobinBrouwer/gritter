@@ -70,11 +70,15 @@ module Gritter
     
     def gflash_titles *args
       options = args.extract_options!
-      titles = { :success => "Success", :warning => "Warning", :error => "Error", :notice => "Notice", :progress => "Progress" }
+      titles = { :success => get_translation(:success), :warning => get_translation(:warning), :error => get_translation(:error), :notice => get_translation(:notice), :progress => get_translation(:progress) }
       options.each do |key, value|
         titles[key] = value if titles.has_key?(key)
       end
       titles
+    end
+    
+    def get_translation translation
+      I18n.t(translation, :scope => [:gflash, :titles])
     end
   end
 end

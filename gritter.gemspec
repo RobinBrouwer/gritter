@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email       = ["robin@45north.nl"]
   s.homepage    = "http://www.45north.nl"
   s.summary     = %q{Growl notifications for your Rails application.}
-  s.description = %q{This Ruby on Rails gem allows you to easily add Growl-like notifications to your application using a JQuery plugin called 'gritter'.}
+  s.description = %q{This Ruby on Rails gem allows you to easily add Growl-like notifications to your application using a jQuery plugin called 'gritter'.}
   
   s.rubyforge_project = "nowarning"
   

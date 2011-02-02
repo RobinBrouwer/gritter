@@ -1,6 +1,6 @@
 # gritter
 
-	version 0.5.1
+	version 0.6.0
 	Robin Brouwer
 	Daniël Zwijnenburg
 	45north
@@ -43,11 +43,19 @@ The :fade_in_speed and :fade_out_speed options accept the following Strings:
 	"slow"
 	"medium"
 	"fast"
-	
 
-## v0.5 changes
+Now you can use gritter inside your Rails application.
+You should really check out the gflash helper. It's really handy!
 
-I have made several changes in version 0.5:
+
+## Changes
+
+Version 0.6 changes:
+
+	- Added locales support for gflash (see README);
+	- README changes.
+
+Version 0.5 changes:
 
 	- Works with Ruby 1.9 now (the Array.to_s was causing problems);
 	- Refactored a lot of code to make everything a bit more logical;
@@ -57,12 +65,6 @@ I have made several changes in version 0.5:
 	- Added an 'e' variable for all the callbacks;
 	- Added String support for :fade_out_speed;
 	- Changed the README.
-
-
-## Upcoming changes
-
-One of the features I have in mind for the following release will be locales support for gflash.
-The only thing you need to add in the Controller is what error should be shown and the locales will do the rest.
 
 
 ## Usage
@@ -76,7 +78,7 @@ There are several helpers you can use with gritter. All of them print out Javasc
 To add the script-tags we added another function called 'js'. It allows you to easily add script-tags around your javascript.
 It can be used in combination with gritter, but also other Javascript you want to run.
 
-Since version 0.3 we also added a gflash helper. You can read more about this helper below.
+Since version 0.3 we also added a gflash helper. This helper supports locales since version 0.6. You can read more about this helper below.
 
 
 ### add_gritter
@@ -154,9 +156,7 @@ The gflash helper is a different kind of flash[:notice] message. It uses the add
 It uses a session to remember the flash messages. Add the following inside your controller action:
 
 	def create
-		...
 		gflash :success => "The product has been created successfully!"
-		...
 	end
 
 Now you can add the following to your layout view inside the body-tag:
@@ -179,13 +179,37 @@ Now the default title will be overwritten. You can use the following gflash opti
 Each uses the corresponding image and title. You can also add multiple gritter notifications at once:
 
 	def create
-		...
-		gflash :success => "The product has been created successfully!", :notify => "This product doesn't have a category."
-		...
+		gflash :success => "The product has been created successfully!", :notice => "This product doesn't have a category."
 	end
 
-Just remember that you can only set the gflash message inside the controller. 
-The gflash helper inside the views will show the notification and change the title. It will not change the message.
+Besides passing the exact text inside the controller, gflash also supports locales (both for messages and titles). 
+When you start your server a new locale file will be added to /config/locales called 'gflash.en.yml'.
+Here you can set the locales for all your gflash messages and the titles. It works like this:
+
+	en:
+	  gflash:
+	    titles:
+	      notice: "Custom notice title"
+	      success: "Success"
+	      warning: "Warning"
+	      error: "Error"
+	      progress: "Progress"
+	    products: # => Controller name
+	      create: # => Action name
+	        notice: "Custom notice message"
+
+Now you can do the following inside your Controller:
+
+	def create
+		gflash :notice => true
+	end
+
+The locales for the :notice title and message will now be used. You can still pass a String to overwrite a locale.
+
+And that's how you add gflash to your Rails application.
+Just remember that you can only set which gflash message you want shown inside the controller.
+The gflash helper inside the views will show the notification and change the title when you pass extra arguments. 
+It will not change the message.
 
 
 ## Special Thanks
