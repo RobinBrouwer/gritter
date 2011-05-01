@@ -75,21 +75,21 @@ There are several helpers you can use with gritter. All of them print out Javasc
 	remove_gritter
 	extend_gritter
 	
-To add the script-tags we added another function called 'js'. It allows you to easily add script-tags around your javascript.
+To add the script-tags we added another function called `js`. It allows you to easily add script-tags around your javascript.
 It can be used in combination with gritter, but also other Javascript you want to run.
 
-Since version 0.3 we also added a gflash helper. This helper supports locales since version 0.6. You can read more about this helper below.
+Since version 0.3 we also added a `gflash` helper. This helper supports locales since version 0.6. You can read more about this helper below.
 
 
 ### add_gritter
 
-The add_gritter helper allows you to add a gritter notification to your application. 
-It outputs Javascript directly into your template. It works like this inside a js.erb file:
+The `add_gritter` helper allows you to add a gritter notification to your application. 
+It outputs Javascript directly into your template. It works like this inside a `js.erb` file:
 
 	<%= add_gritter("This is a notification just for you!") %>
 
-The add_gritter helper allows you to easily set the text for the notification. 
-When you want to change the title, just pass the :title argument to the helper:
+The `add_gritter` helper allows you to easily set the text for the notification. 
+When you want to change the title, just pass the `:title` argument to the helper:
 
 	<%= add_gritter("This is a notification just for you!", :title => "Please pay attention!") %>
 
@@ -105,7 +105,7 @@ There are many more arguments you can pass to the helper:
 	:before_close => "alert('Closing!');"  # => Execute javascript before closing.
 	:after_close => "alert('Closed!');"    # => Execute javascript after closing.
 
-The :image argument also allows you to easily set five different images:
+The `:image` argument also allows you to easily set five different images:
 
 	:success
 	:warning
@@ -113,7 +113,7 @@ The :image argument also allows you to easily set five different images:
 	:error
 	:progress
 
-It works like this in combination with flash[:notice] and the 'js' helper:
+It works like this in combination with flash[:notice] and the `js` helper:
 
 	<%= js add_gritter(flash[:notice], :image => :notice, :title => "Pay attention!", :sticky => true) %>
 
@@ -130,7 +130,7 @@ It's great for all kinds of notifications, including the flash notifications you
 
 ### remove_gritter
 
-The remove_gritter helper removes all gritter notifications from the screen. You can use it inside a js.erb file:
+The `remove_gritter` helper removes all gritter notifications from the screen. You can use it inside a `js.erb` file:
 
 	<%= remove_gritter %>
 
@@ -139,20 +139,20 @@ You can pass two extra arguments to this helper.
 	:before_close => "alert('Closing!');"  # => Execute javascript before closing.
 	:after_close => "alert('Closed!');"    # => Execute javascript after closing.
 
-You can also use the 'js' helper to add script-tags around this helper.
+You can also use the `js` helper to add script-tags around this helper.
 
 
 ### extend_gritter
 
-The extend_gritter helper allows you to set the default gritter options, just like you can do with the include_gritter helpers. 
-To see what arguments you can pass to this helper just check the include_gritter helper.
+The `extend_gritter` helper allows you to set the default gritter options, just like you can do with the `include_gritter` helpers. 
+To see what arguments you can pass to this helper just check the `include_gritter` helper.
 
-You can also use the 'js' helper to add script-tags around this helper.
+You can also use the `js` helper to add script-tags around this helper.
 
 
 ### gflash
 
-The gflash helper is a different kind of flash[:notice] message. It uses the add_gritter helper and the default images used in this plugin.
+The `gflash` helper is a different kind of `flash[:notice]` message. It uses the `add_gritter` helper and the default images used in this plugin.
 It uses a session to remember the flash messages. Add the following inside your controller action:
 
 	def create
@@ -164,7 +164,7 @@ Now you can add the following to your layout view inside the body-tag:
 	<%= gflash %>
 	
 The flash-message will be shown with 'success.png' as the image and 'Success' as the title.
-To change the title you can add the following to the gflash helper inside the layout:
+To change the title you can add the following to the `gflash` helper inside the layout:
 
 	<%= gflash :success => "It has been successful!" %>
 	
@@ -183,7 +183,7 @@ Each uses the corresponding image and title. You can also add multiple gritter n
 	end
 
 Besides passing the exact text inside the controller, gflash also supports locales (both for messages and titles). 
-When you start your server a new locale file will be added to /config/locales called 'gflash.en.yml'.
+When you start your server a new locale file will be added to /config/locales called `gflash.en.yml`.
 Here you can set the locales for all your gflash messages and the titles. It works like this:
 
 	en:
@@ -200,11 +200,15 @@ Here you can set the locales for all your gflash messages and the titles. It wor
 
 Now you can do the following inside your Controller:
 
-	def create
+   def create
 		gflash :notice => true
 	end
 
-The locales for the :notice title and message will now be used. You can still pass a String to overwrite a locale.
+The locales for the `:notice` title and message will now be used. You can still pass a `String` to overwrite a locale.
+
+You can also use gflash inside `js.erb` files:
+
+	<%= gflash :js => true %>
 
 And that's how you add gflash to your Rails application.
 Just remember that you can only set which gflash message you want shown inside the controller.

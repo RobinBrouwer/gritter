@@ -58,7 +58,7 @@ module Gritter
         titles = gflash_titles(options)
         flashes = session[:gflash].map { |key, value| add_gritter(value, :image => key, :title => titles[key]) }
         session[:gflash] = nil
-        js(flashes).html_safe
+        options[:js] ? flashes : js(flashes).html_safe
       end
     end
     
