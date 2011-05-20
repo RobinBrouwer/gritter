@@ -14,7 +14,6 @@ module Gritter
     
     def add_gritter text, *args
       options = args.extract_options!
-      options[:title] = "Notification" if options[:title].blank?
       options[:image] = "/images/gritter/#{options[:image]}.png" if %w(success warning error notice progress).include?(options[:image].to_s)
       notification = ["$.gritter.add({"]
       notification.push("image:'#{options[:image]}',") if options[:image].present?
@@ -25,7 +24,7 @@ module Gritter
       notification.push("after_open:function(e){#{options[:after_open]}},") if options[:after_open].present?
       notification.push("before_close:function(e){#{options[:before_close]}},") if options[:before_close].present?
       notification.push("after_close:function(e){#{options[:after_close]}},") if options[:after_close].present?
-      notification.push("title:'#{escape_javascript(options[:title])}',")
+			notification.push("title:'#{escape_javascript(options[:title])}',") if options[:title].present?
       notification.push("text:'#{escape_javascript(text)}'")
       notification.push("});")
       text.present? ? notification.join.html_safe : nil
