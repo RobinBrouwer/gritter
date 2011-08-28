@@ -15,7 +15,7 @@ module Gritter
     def add_gritter text, *args
       options = args.extract_options!
       options[:title] = "Notification" if options[:title].blank?
-      options[:image] = "/images/gritter/#{options[:image]}.png" if %w(success warning error notice progress).include?(options[:image].to_s)
+      options[:image] = ::Rails.version < "3.1" ? "/images/gritter/#{options[:image]}.png" : asset_path("#{options[:image]}.png") if %w(success warning error notice progress).include?(options[:image].to_s)
       notification = ["$.gritter.add({"]
       notification.push("image:'#{options[:image]}',") if options[:image].present?
       notification.push("sticky:#{options[:sticky]},") if options[:sticky].present?
