@@ -11,7 +11,7 @@ This Ruby on Rails gem allows you to easily add Growl-like notifications to your
 
 You can use this gem by putting the following inside your Gemfile:
 
-  gem "gritter"
+  gem "gritter", "0.6.2"
 
 You can also install this as a plugin with the following command:
 
