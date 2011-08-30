@@ -24,13 +24,13 @@ This is a Rails 3 gem. When you're using Rails 2 you should use version 0.3 (thi
 ## Rails 3.1 installation
 
 Gritter now also supports Rails 3.1, thanks to [finist](https://github.com/finist). 
-Adding the JavaScript en CSS files is accomplished in a different way, because of the new 'assets' folder inside /app.
+Adding the JavaScript and CSS files is accomplished in a different way, because of the new 'assets' folder inside /app.
 
-Add the following to /app/assets/javascripts/application.js:
+Add the following to `/app/assets/javascripts/application.js`:
 
     //= require gritter
 
-And the following to /app/assets/stylesheets/application.css:
+And the following to `/app/assets/stylesheets/application.css`:
 
     *= require gritter
 
