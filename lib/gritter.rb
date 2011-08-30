@@ -8,7 +8,7 @@ module Gritter
     raise "ActionController is not available yet." unless defined?(ActionController)
     ActionController::Base.send(:helper, Gritter::Helpers)
     ActionController::Base.send(:include, Gritter::Gflash)
-   	Gritter.install_gritter if ::Rails.version < "3.1"
+    Gritter.install_gritter if ::Rails.version < "3.1"
     @initialized = true
   end
   

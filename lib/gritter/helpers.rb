@@ -21,7 +21,7 @@ module Gritter
       notification.push("sticky:#{options[:sticky]},") if options[:sticky].present?
       notification.push("time:#{options[:time]},") if options[:time].present?
       notification.push("class_name:'#{options[:class_name]}',") if options[:class_name].present?
-    	notification.push("before_open:function(e){#{options[:before_open]}},") if options[:before_open].present?
+      notification.push("before_open:function(e){#{options[:before_open]}},") if options[:before_open].present?
       notification.push("after_open:function(e){#{options[:after_open]}},") if options[:after_open].present?
       notification.push("before_close:function(e){#{options[:before_close]}},") if options[:before_close].present?
       notification.push("after_close:function(e){#{options[:after_close]}},") if options[:after_close].present?
