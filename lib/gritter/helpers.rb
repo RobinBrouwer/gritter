@@ -16,7 +16,7 @@ module Gritter
       options = args.extract_options!
       options[:title] = "Notification" if options[:title].blank?
       options[:image] = ::Rails.version < "3.1" ? "/images/gritter/#{options[:image]}.png" : asset_path("#{options[:image]}.png") if %w(success warning error notice progress).include?(options[:image].to_s)
-      notification = ["$.gritter.add({"]
+      notification = ["jQuery.gritter.add({"]
       notification.push("image:'#{options[:image]}',") if options[:image].present?
       notification.push("sticky:#{options[:sticky]},") if options[:sticky].present?
       notification.push("time:#{options[:time]},") if options[:time].present?
@@ -33,7 +33,7 @@ module Gritter
     
     def remove_gritter *args
       options = args.extract_options!
-      removed = ["$.gritter.removeAll({"]
+      removed = ["jQuery.gritter.removeAll({"]
       removed.push("before_close:function(e){#{options[:before_close]}},") if options[:before_close].present?
       removed.push("after_close:function(e){#{options[:after_close]}},") if options[:after_close].present?
       removed.push("});")
@@ -44,7 +44,7 @@ module Gritter
       options = args.extract_options!
       options[:fade_in_speed] = "'#{options[:fade_in_speed]}'" if options[:fade_in_speed].is_a?(String)
       options[:fade_out_speed] = "'#{options[:fade_out_speed]}'" if options[:fade_out_speed].is_a?(String)
-      extended = ["$.extend($.gritter.options,{"]
+      extended = ["jQuery.extend($.gritter.options,{"]
       extended.push("fade_in_speed:#{options[:fade_in_speed]},") if options[:fade_in_speed].present?
       extended.push("fade_out_speed:#{options[:fade_out_speed]},") if options[:fade_out_speed].present?
       extended.push("time:#{options[:time]}") if options[:time].present?
