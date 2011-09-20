@@ -16,7 +16,8 @@ module Gritter
       options = args.extract_options!
       options[:title] = "Notification" if options[:title].blank?
       options[:image] = ::Rails.version < "3.1" ? "/images/gritter/#{options[:image]}.png" : asset_path("#{options[:image]}.png") if %w(success warning error notice progress).include?(options[:image].to_s)
-      notification = ["jQuery.gritter.add({"]
+      notification = ["jQuery(function(){"]
+      notification.push("jQuery.gritter.add({")
       notification.push("image:'#{options[:image]}',") if options[:image].present?
       notification.push("sticky:#{options[:sticky]},") if options[:sticky].present?
       notification.push("time:#{options[:time]},") if options[:time].present?
@@ -27,6 +28,7 @@ module Gritter
       notification.push("after_close:function(e){#{options[:after_close]}},") if options[:after_close].present?
       notification.push("title:'#{escape_javascript(options[:title])}',")
       notification.push("text:'#{escape_javascript(text)}'")
+      notification.push("});")
       notification.push("});")
       text.present? ? notification.join.html_safe : nil
     end
