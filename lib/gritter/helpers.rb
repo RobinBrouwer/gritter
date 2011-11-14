@@ -56,7 +56,12 @@ module Gritter
       if session[:gflash].present?
         options = args.extract_options!
         titles = gflash_titles(options)
-        flashes = session[:gflash].map { |key, value| add_gritter(value, :image => key, :title => titles[key]) }
+        flashes = []
+        session[:gflash].each do |key, value|
+          value.each do |text|
+            flashes.push(add_gritter(text, :image => key, :title => titles[key]))
+          end
+        end
         session[:gflash] = nil
         options[:js] ? flashes : js(flashes).html_safe
       end
