@@ -1,6 +1,6 @@
 # gritter
 
-    version 0.6.2
+    version 0.6.3
     Robin Brouwer
     Daniël Zwijnenburg
     45north
