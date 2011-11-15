@@ -58,8 +58,16 @@ module Gritter
         titles = gflash_titles(options)
         flashes = []
         session[:gflash].each do |key, value|
-          value.each do |text|
-            flashes.push(add_gritter(text, :image => key, :title => titles[key]))
+          value.each do |gflash_value|
+            gritter_options = { :image => key, :title => titles[key] }
+            if gflash_value.is_a?(Hash)
+              text = gflash_value.has_key?(:value) ? (gflash_value[:value] and gflash_value.delete(:value)) : nil
+              gritter_options.merge!(gflash_value)
+            else
+              text = gflash_value
+            end
+            
+            flashes.push(add_gritter(text, gritter_options))
           end
         end
         session[:gflash] = nil
@@ -72,6 +80,10 @@ module Gritter
     end
     
     private
+    
+    def gflash_text(value)
+      value == true ? I18n.t("gflash.#{params[:controller]}.#{params[:action]}.#{key}") : value
+    end
     
     def gflash_titles *args
       options = args.extract_options!
