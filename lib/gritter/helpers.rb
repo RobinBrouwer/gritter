@@ -1,17 +1,5 @@
 module Gritter
   module Helpers
-    def include_gritter *args
-      options = args.extract_options!
-      includes = [stylesheet_link_tag("gritter/jquery.gritter.css"), javascript_include_tag("gritter/jquery.gritter.min.js")]
-      includes.push(js(extend_gritter(options))) if options.present?
-      includes.join("\n").html_safe
-    end
-    
-    def include_gritter_and_jquery *args
-      includes = [javascript_include_tag("http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"), include_gritter(*args)]
-      includes.join("\n").html_safe
-    end
-    
     def add_gritter text, *args
       options = args.extract_options!
       options[:title] = "Notification" if options[:title].blank?
