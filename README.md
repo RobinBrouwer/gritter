@@ -57,7 +57,6 @@ There are several helpers you can use with gritter. All of them print out Javasc
     add_gritter
     remove_gritter
     extend_gritter
-    gflash
   
 To add the script-tags we added another function called `js`. It allows you to easily add script-tags around your javascript.
 It can be used in combination with gritter, but also other Javascript you want to run.
