@@ -34,10 +34,12 @@ module Gritter
       options = args.extract_options!
       options[:fade_in_speed] = "'#{options[:fade_in_speed]}'" if options[:fade_in_speed].is_a?(String)
       options[:fade_out_speed] = "'#{options[:fade_out_speed]}'" if options[:fade_out_speed].is_a?(String)
+      options[:position] = "'#{options[:position].to_s.gsub("_", "-")}'" if options[:position]
       extended = ["jQuery.extend($.gritter.options,{"]
       extended.push("fade_in_speed:#{options[:fade_in_speed]},") if options[:fade_in_speed].present?
       extended.push("fade_out_speed:#{options[:fade_out_speed]},") if options[:fade_out_speed].present?
-      extended.push("time:#{options[:time]}") if options[:time].present?
+      extended.push("time:#{options[:time]},") if options[:time].present?
+      extended.push("position:#{options[:position]}") if options[:position].present?
       extended.push("});")
       extended.join.html_safe
     end

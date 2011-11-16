@@ -54,6 +54,7 @@ There are several helpers you can use with gritter. All of them print out Javasc
     add_gritter
     remove_gritter
     extend_gritter
+    gflash
   
 To add the script-tags we added another function called `js`. It allows you to easily add script-tags around your javascript.
 It can be used in combination with gritter, but also other Javascript you want to run.
@@ -134,12 +135,20 @@ These are the options you can pass to `extend_gritter`:
     :fade_in_speed => "medium"            # => Allows you to set the fade-in-speed. Can be String or Integer (in ms).
     :fade_out_speed => 1000               # => Allows you to set the fade-out-speed. Can be String or Integer (in ms).
     :time => 8000                         # => Allows you to set the time the notification stays. Must be an Integer (in ms).
+    :position => :bottom_left             # => Allows you to set the position for all gritter messages.
 
 The :fade_in_speed and :fade_out_speed options accept the following Strings:
-  
+
     "slow"
     "medium"
     "fast"
+
+The :position option accepts four different Symbols:
+
+    :top_left
+    :top_right
+    :bottom_left
+    :bottom_right
 
 You can also use the `js` helper to add script-tags around this helper.
 

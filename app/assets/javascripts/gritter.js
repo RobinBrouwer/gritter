@@ -68,7 +68,7 @@
   var Gritter = {
       
     // Public - options to over-ride with $.gritter.options in "add"
-        position: '',
+    position: '',
     fade_in_speed: '',
     fade_out_speed: '',
     time: '',
@@ -87,7 +87,7 @@
     * @return {Integer} The specific numeric id to that gritter notification
     */
     add: function(params){
-          
+      
       // We might have some issues if we don't have a title or text!
       if(!params.title || !params.text){
         throw 'You need to fill out the first 2 params: "title" and "text"'; 
@@ -97,14 +97,14 @@
       if(!this._is_setup){
         this._runSetup();
       }
-          
+      
       // Basics
       var user = params.title, 
         text = params.text,
         image = params.image || '',
         sticky = params.sticky || false,
         item_class = params.class_name || '',
-                position = $.gritter.options.position,
+        position = $.gritter.options.position,
         time_alive = params.time || '';
       
       this._verifyWrapper();
@@ -226,7 +226,7 @@
         this._countRemoveWrapper(unique_id, e);
         
       }
-              
+    
     },
     
     /**
