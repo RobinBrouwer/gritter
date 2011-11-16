@@ -37,7 +37,7 @@ And that's it!
 
 Version 1.0.0 changes:
 
-    - Added new version for the gritter jQuery plugin.
+    - Added new version for the gritter jQuery plugin (1.7.1).
     - Added position option for your gritter messages.
     - Locale isn't automatically generated. You need to use the gritter:locale generator.
     - Using SCSS image_path instead of ERB image_path inside the CSS.
