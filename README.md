@@ -9,7 +9,7 @@ This Ruby on Rails gem allows you to easily add Growl-like notifications to your
 
 ## Note
 
-This is a Rails 3.1 gem. Are you using Rails 3.0 or lower? Check out the ['old' branch on Github](https://github.com/RobinBrouwer/gritter/tree/edge). Want support for IE6? 
+This is a Rails 3.1 gem. Are you using Rails 3.0 or lower? Check out [the 'old' branch on Github](https://github.com/RobinBrouwer/gritter/tree/old). Want support for IE6? 
 Also check out that branch, because the newer version of gritter inside this gem dropped support for it.
 
 
