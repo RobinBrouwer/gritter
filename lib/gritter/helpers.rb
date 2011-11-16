@@ -73,10 +73,6 @@ module Gritter
     
     private
     
-    def gflash_text(value)
-      value == true ? I18n.t("gflash.#{params[:controller]}.#{params[:action]}.#{key}") : value
-    end
-    
     def gflash_titles *args
       options = args.extract_options!
       titles = { :success => get_translation(:success), :warning => get_translation(:warning), :error => get_translation(:error), :notice => get_translation(:notice), :progress => get_translation(:progress) }

@@ -12,7 +12,11 @@ module Gritter
       
       options.each do |key, value|
         if value.is_a?(Hash)
-          value[:value] = gflash_text(key, value[:value]) if value.has_key?(:value)
+          if value.has_key?(:value)
+            value[:value] = gflash_text(key, value[:value])
+          else
+            value[:value] = gflash_translation(key)
+          end
         else
           value = gflash_text(key, value)
         end
