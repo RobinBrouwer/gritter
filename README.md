@@ -1,6 +1,6 @@
 # gritter
 
-    version 0.6.2
+    version 0.6.3
     Robin Brouwer
     Daniël Zwijnenburg
     45north
@@ -66,6 +66,11 @@ You should really check out the gflash helper. It's really handy!
 
 
 ## Changes
+
+Version 0.6.3 changes:
+
+    - Calling gflash multiple times won't override older messages.
+    - You can set the time, sticky and class_name per gflash message.
 
 Version 0.6.2 changes:
 
@@ -236,6 +241,12 @@ And that's how you add gflash to your Rails application.
 Just remember that you can only set which gflash message you want shown inside the controller.
 The gflash helper inside the views will show the notification and change the title when you pass extra arguments. 
 It will not change the message.
+
+Since 0.6.3 you can change the default time, sticky and class_name options for each gflash message.
+This is done inside the Controller and works like this:
+
+    gflash :success => { :value => true, :time => 2000, :class_name => "my_class", :sticky => true }
+    gflash :error => { :value => "Custom error", :time => 3000, :class_name => "my_error_class", :sticky => false }
 
 
 ## Special Thanks
