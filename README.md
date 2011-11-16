@@ -7,14 +7,21 @@
 
 This Ruby on Rails gem allows you to easily add Growl-like notifications to your application using a jQuery plugin called 'gritter'.
 
+## Note
+
+This is a Rails 3.1 gem. Are you using Rails 3.0 or lower? Check out the ['old' branch on Github](https://github.com/RobinBrouwer/gritter/tree/edge). Want support for IE6? 
+Also check out that branch, because the newer version of gritter inside this gem dropped support for it.
+
+
 ## Installation
 
 You can use this gem by putting the following inside your Gemfile:
 
     gem "gritter", "1.0.0"
 
-This is a Rails 3.1 gem. Are you using Rails 3.0 or lower? Check out the ['old' branch on Github](https://github.com/RobinBrouwer/gritter/tree/edge). Want support for IE6? 
-Also check out that branch, because the newer version of gritter inside this gem dropped support for it.
+Now generate the locale for gritter:
+
+    rails g gritter:locale
 
 Add the following to `/app/assets/javascripts/application.js`:
 
@@ -32,6 +39,7 @@ Version 1.0.0 changes:
 
     - Added new version for the gritter jQuery plugin.
     - Added position option for your gritter messages.
+    - Locale isn't automatically generated. You need to use the gritter:locale generator.
     - Using SCSS image_path instead of ERB image_path inside the CSS.
     - Adding locale-based gflash messages got a bit easier.
     - Gritter now only works in Rails 3.1. You should check out the 'old' branch for other Rails versions.
