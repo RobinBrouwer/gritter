@@ -9,6 +9,67 @@
  * Version: 1.7.1
  */
 
+// Modernizr for CSS3 support check.
+window.Modernizr = function (a, b, c) {
+   function A(a, b) {
+       var c = a.charAt(0).toUpperCase() + a.substr(1),
+           d = (a + " " + m.join(c + " ") + c).split(" ");
+       return z(d, b)
+   }
+   function z(a, b) {
+       for (var d in a) if (j[a[d]] !== c) return b == "pfx" ? a[d] : !0;
+       return !1
+   }
+   function y(a, b) {
+       return !!~ ("" + a).indexOf(b)
+   }
+   function x(a, b) {
+       return typeof a === b
+   }
+   function w(a, b) {
+       return v(prefixes.join(a + ";") + (b || ""))
+   }
+   function v(a) {
+       j.cssText = a
+   }
+   var d = "2.0.6",
+       e = {},
+       f = b.documentElement,
+       g = b.head || b.getElementsByTagName("head")[0],
+       h = "modernizr",
+       i = b.createElement(h),
+       j = i.style,
+       k, l = Object.prototype.toString,
+       m = "Webkit Moz O ms Khtml".split(" "),
+       n = {},
+       o = {},
+       p = {},
+       q = [],
+       r = function (a, c, d, e) {
+           var g, i, j, k = b.createElement("div");
+           if (parseInt(d, 10)) while (d--) j = b.createElement("div"), j.id = e ? e[d] : h + (d + 1), k.appendChild(j);
+           g = ["&shy;", "<style>", a, "</style>"].join(""), k.id = h, k.innerHTML += g, f.appendChild(k), i = c(k, a), k.parentNode.removeChild(k);
+           return !!i
+       },
+       s, t = {}.hasOwnProperty,
+       u;
+   !x(t, c) && !x(t.call, c) ? u = function (a, b) {
+       return t.call(a, b)
+   } : u = function (a, b) {
+       return b in a && x(a.constructor.prototype[b], c)
+   }, n.rgba = function () {
+       v("background-color:rgba(150,255,150,.5)");
+       return y(j.backgroundColor, "rgba")
+   }, n.borderradius = function () {
+       return A("borderRadius")
+   };
+   for (var B in n) u(n, B) && (s = B.toLowerCase(), e[s] = n[B](), q.push((e[s] ? "" : "no-") + s));
+   v(""), i = k = null, e._version = d, e._domPrefixes = m, e.testProp = function (a) {
+       return z([a])
+   }, e.testAllProps = A, e.testStyles = r;
+   return e
+}(this, this.document);
+
 (function($){
   
   /**
@@ -62,6 +123,17 @@
   }
   
   /**
+  * CSS3 check
+  */
+  var gritter_item;
+  var gritter_content = '[[close]][[image]]<div class="[[class_name]]"><span class="gritter-title">[[username]]</span><p>[[text]]</p></div><div style="clear:both"></div>';
+  if(Modernizr.borderradius && Modernizr.rgba) {
+    gritter_item = '<div class="gritter-item gritter-css3">'+ gritter_content +'</div>';
+  } else {
+    gritter_item = '<div class="gritter-top"></div><div class="gritter-item gritter-css2">'+ gritter_content +'</div><div class="gritter-bottom"></div>';    
+  }
+  
+  /**
   * Big fat Gritter object
   * @constructor (not really since it's object literal)
   */
@@ -78,7 +150,7 @@
     _item_count: 0,
     _is_setup: 0,
     _tpl_close: '<div class="gritter-close"></div>',
-    _tpl_item: '<div id="gritter-item-[[number]]" class="gritter-item-wrapper [[item_class]]" style="display:none"><div class="gritter-top"></div><div class="gritter-item">[[close]][[image]]<div class="[[class_name]]"><span class="gritter-title">[[username]]</span><p>[[text]]</p></div><div style="clear:both"></div></div><div class="gritter-bottom"></div></div>',
+    _tpl_item: '<div id="gritter-item-[[number]]" class="gritter-item-wrapper [[item_class]]" style="display:none">'+ gritter_item +'</div>',
     _tpl_wrap: '<div id="gritter-notice-wrapper"></div>',
       
     /**

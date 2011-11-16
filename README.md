@@ -45,6 +45,7 @@ Version 1.0.0 changes:
     - Adding locale-based gflash messages got a bit easier.
     - You can now use a :gflash option inside the redirect_to method.
     - Using SCSS image_path instead of ERB image_path inside the CSS.
+    - Added CSS3 support for gritter.
     - Refactored some parts of the gem.
     - Changed the README quite a bit.
 
