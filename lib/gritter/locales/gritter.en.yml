@@ -17,5 +17,5 @@ en:
     #     error: "Something went wrong"
     #
     # Inside controller: 
-    # gflash :notice => true, :error => true
+    # gflash :notice, :error
     #
