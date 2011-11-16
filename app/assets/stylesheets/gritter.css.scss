@@ -53,6 +53,7 @@
   padding:2px 11px 8px 11px;
   font-size: 11px;
   font-family:verdana;
+  filter:inherit; // ie8 fix
   
   &.gritter-css2 {
     background:url(image_path('gritter.png')) no-repeat left -40px;
@@ -87,6 +88,7 @@
   cursor:pointer;
   width:30px;
   height:30px;
+  filter:inherit; // ie8 fix
 }
 .gritter-css2 .gritter-close {
   background:url(image_path('gritter.png')) no-repeat left top;
