@@ -1,6 +1,6 @@
 # gritter
 
-    version 0.6.3
+    version 1.0.0
     Robin Brouwer
     Daniël Zwijnenburg
     45north
@@ -11,20 +11,10 @@ This Ruby on Rails gem allows you to easily add Growl-like notifications to your
 
 You can use this gem by putting the following inside your Gemfile:
 
-    gem "gritter", "0.6.3"
+    gem "gritter", "1.0.0"
 
-You can also install this as a plugin with the following command:
-
-    rails plugin install git://github.com/RobinBrouwer/gritter.git
-
-This is a Rails 3 gem. When you're using Rails 2 you should use version 0.3 (this is a plugin):
-
-    script/plugin install git://github.com/RobinBrouwer/gritter.git -r 'tag v0.3'
-
-## Rails 3.1 installation
-
-Gritter now also supports Rails 3.1, thanks to [finist](https://github.com/finist). 
-Adding the JavaScript and CSS files is accomplished in a different way, because of the new 'assets' folder inside /app.
+This is a Rails 3.1 gem. Are you using Rails 3.0 or lower? Check out the ['old' branch on Github](https://github.com/RobinBrouwer/gritter/tree/edge). Want support for IE6? 
+Also check out that branch, because the newer version of gritter inside this gem dropped support for it.
 
 Add the following to `/app/assets/javascripts/application.js`:
 
@@ -34,64 +24,19 @@ And the following to `/app/assets/stylesheets/application.css`:
 
     *= require gritter
 
-And that's it! It now works with Rails 3.1. No need to add `include_gritter` to your layout.
-
-## Rails 3.0 installation
-
-Start your server and you'll see that three folders are added to your /javascripts, /stylesheets and /images folders.
-Now you can use gritter inside your Rails 3.0 application.
-
-Now add the following to your head-tag inside the layout:
-
-    <%= include_gritter %>
-
-If you also want to add jQuery together with gritter (from googleapis.com) you can use the following helper:
-
-    <%= include_gritter_and_jquery %>
-
-You can pass extra arguments to these functions to set the default options for gritter.
-
-    :fade_in_speed => "medium"            # => Allows you to set the fade-in-speed. Can be String or Integer (in ms).
-    :fade_out_speed => 1000               # => Allows you to set the fade-out-speed. Can be String or Integer (in ms).
-    :time => 8000                         # => Allows you to set the time the notification stays. Must be an Integer (in ms).
-
-The :fade_in_speed and :fade_out_speed options accept the following Strings:
-  
-    "slow"
-    "medium"
-    "fast"
-
-Now you can use gritter inside your Rails application.
-You should really check out the gflash helper. It's really handy!
-
+And that's it!
 
 ## Changes
 
-Version 0.6.3 changes:
+Version 1.0.0 changes:
 
-    - Calling gflash multiple times won't override older messages.
-    - You can set the time, sticky and class_name per gflash message.
-
-Version 0.6.2 changes:
-
-    - Reduced the size of all images;
-    - Also works with Rails 3.1.
-
-Version 0.6 changes:
-
-    - Added locales support for gflash (see README);
-    - README changes.
-
-Version 0.5 changes:
-
-    - Works with Ruby 1.9 now (the Array.to_s was causing problems);
-    - Refactored a lot of code to make everything a bit more logical;
-    - The js helper doesn't add a semicolon (;) after the script anymore;
-    - The js helper accepts several scripts as options;
-    - Changed the way linebreaks (\n) are created;
-    - Added an 'e' variable for all the callbacks;
-    - Added String support for :fade_out_speed;
-    - Changed the README.
+    - Added new version for the gritter jQuery plugin.
+    - Added position option for your gritter messages.
+    - Using SCSS image_path instead of ERB image_path inside the CSS.
+    - Adding locale-based gflash messages got a bit easier.
+    - Gritter now only works in Rails 3.1. You should check out the 'old' branch for other Rails versions.
+    - Removed everything that isn't needed for Rails 3.1.
+    - Changed the README quite a bit.
 
 
 ## Usage
@@ -105,7 +50,8 @@ There are several helpers you can use with gritter. All of them print out Javasc
 To add the script-tags we added another function called `js`. It allows you to easily add script-tags around your javascript.
 It can be used in combination with gritter, but also other Javascript you want to run.
 
-Since version 0.3 we also added a `gflash` helper. This helper supports locales since version 0.6. You can read more about this helper below.
+The most popular feature of this gem is `gflash`. This replaces the regular flash messages in Rails and 
+automatically puts these in gritter boxes. Read further to learn more about gflash.
 
 
 ### add_gritter
@@ -171,8 +117,21 @@ You can also use the `js` helper to add script-tags around this helper.
 
 ### extend_gritter
 
-The `extend_gritter` helper allows you to set the default gritter options, just like you can do with the `include_gritter` helpers. 
-To see what arguments you can pass to this helper just check the `include_gritter` helper.
+The `extend_gritter` helper allows you to set the default gritter options.
+
+    <%= extend_gritter :time => 1000 %>
+
+These are the options you can pass to `extend_gritter`:
+
+    :fade_in_speed => "medium"            # => Allows you to set the fade-in-speed. Can be String or Integer (in ms).
+    :fade_out_speed => 1000               # => Allows you to set the fade-out-speed. Can be String or Integer (in ms).
+    :time => 8000                         # => Allows you to set the time the notification stays. Must be an Integer (in ms).
+
+The :fade_in_speed and :fade_out_speed options accept the following Strings:
+  
+    "slow"
+    "medium"
+    "fast"
 
 You can also use the `js` helper to add script-tags around this helper.
 
@@ -189,12 +148,12 @@ It uses a session to remember the flash messages. Add the following inside your 
 Now you can add the following to your layout view inside the body-tag:
 
     <%= gflash %>
-  
+
 The flash-message will be shown with 'success.png' as the image and 'Success' as the title.
 To change the title you can add the following to the `gflash` helper inside the layout:
 
     <%= gflash :success => "It has been successful!" %>
-  
+
 Now the default title will be overwritten. You can use the following gflash options:
 
     :success
@@ -231,7 +190,23 @@ Now you can do the following inside your Controller:
       gflash :notice => true
     end
 
-The locales for the `:notice` title and message will now be used. You can still pass a `String` to overwrite a locale.
+The locales for the `:notice` title and message will now be used. You can still pass a `String` to override a locale.
+Since gritter version 1.0 you can also do the following to add the gritter messages:
+
+    def create
+      gflash :notice, :success, :error
+    end
+
+No need to pass `true` to each key.
+
+You can change the default time, sticky and class_name options for each gritter message.
+This is done inside the Controller and works like this:
+
+    gflash :success => { :time => 2000, :class_name => "my_class", :sticky => true }
+    gflash :success => { :value => true, :time => 2000, :class_name => "my_class", :sticky => true }
+    gflash :error => { :value => "Custom error", :time => 3000, :class_name => "my_error_class", :sticky => false }
+
+When you don't pass a `:value` it uses the locale. Same goes for when you pass `true` to `:value`.
 
 You can also use gflash inside `js.erb` files:
 
@@ -241,12 +216,6 @@ And that's how you add gflash to your Rails application.
 Just remember that you can only set which gflash message you want shown inside the controller.
 The gflash helper inside the views will show the notification and change the title when you pass extra arguments. 
 It will not change the message.
-
-Since 0.6.3 you can change the default time, sticky and class_name options for each gflash message.
-This is done inside the Controller and works like this:
-
-    gflash :success => { :value => true, :time => 2000, :class_name => "my_class", :sticky => true }
-    gflash :error => { :value => "Custom error", :time => 3000, :class_name => "my_error_class", :sticky => false }
 
 
 ## Special Thanks
