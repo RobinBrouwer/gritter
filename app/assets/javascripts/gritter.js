@@ -283,10 +283,8 @@ window.Modernizr = function (a, b, c) {
       
       // Fade it out or remove it
       if(fade){
-      
-        e.animate({
-          opacity: 0
-        }, fade_out_speed, function(){
+        
+        e.fadeOut(fade_out_speed, function(){
           e.animate({ height: 0 }, 300, function(){
             Gritter._countRemoveWrapper(unique_id, e, manual_close);
           })
