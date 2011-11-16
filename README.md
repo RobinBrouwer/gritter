@@ -146,7 +146,7 @@ The :fade_in_speed and :fade_out_speed options accept the following Strings:
 The :position option accepts four different Symbols:
 
     :top_left
-    :top_right
+    :top_right      # Default
     :bottom_left
     :bottom_right
 
