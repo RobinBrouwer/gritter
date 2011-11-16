@@ -37,13 +37,15 @@ And that's it!
 
 Version 1.0.0 changes:
 
+    - Gritter now only works in Rails 3.1. You should check out the 'old' branch for other Rails versions.
+    - Removed everything that isn't needed for Rails 3.1.
     - Added new version for the gritter jQuery plugin (1.7.1).
     - Added position option for your gritter messages.
     - Locale isn't automatically generated. You need to use the gritter:locale generator.
-    - Using SCSS image_path instead of ERB image_path inside the CSS.
     - Adding locale-based gflash messages got a bit easier.
-    - Gritter now only works in Rails 3.1. You should check out the 'old' branch for other Rails versions.
-    - Removed everything that isn't needed for Rails 3.1.
+    - You can now use a :gflash option inside the redirect_to method.
+    - Using SCSS image_path instead of ERB image_path inside the CSS.
+    - Refactored some parts of the gem.
     - Changed the README quite a bit.
 
 
@@ -229,10 +231,21 @@ You can also use gflash inside `js.erb` files:
 
     <%= gflash :js => true %>
 
-And that's how you add gflash to your Rails application.
-Just remember that you can only set which gflash message you want shown inside the controller.
-The gflash helper inside the views will show the notification and change the title when you pass extra arguments. 
-It will not change the message.
+You can also use gflash directly inside the `redirect_to` method.
+
+    def create
+      redirect_to @post, :gflash => [:notice, :success]
+    end
+    
+    def destroy
+      redirect_to :posts, :gflash => { :warning => "You just deleted something important." }
+    end
+    
+    def logged_in?
+      redirect_to :login, :gflash => { :error => { :value => "You are not logged in!", :sticky => true } }
+    end
+
+And that's how you add gflash to your Rails application!
 
 
 ## Special Thanks

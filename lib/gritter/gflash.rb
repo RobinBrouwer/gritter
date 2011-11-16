@@ -1,5 +1,13 @@
 module Gritter
   module Gflash
+    def redirect_to(options = {}, response_status_and_flash = {})
+      if response_status_and_flash.has_key?(:gflash)
+        gflash(response_status_and_flash[:gflash])
+        response_status_and_flash.delete(:gflash)
+      end
+      super(options, response_status_and_flash)
+    end
+    
     def gflash *args
       session[:gflash] ||= {}
       options = args.extract_options!
