@@ -173,7 +173,11 @@ To change the title you can add the following to the `gflash` helper inside the 
 
     <%= gflash :success => "It has been successful!" %>
 
-Now the default title will be overwritten. You can use the following gflash options:
+Now the default title will be overwritten. You can also use gflash inside `js.erb` files:
+
+    <%= gflash :js => true %>
+
+The :success key isn't the only option supported by gflash. You can use the following gflash options:
 
     :success
     :warning
@@ -226,10 +230,6 @@ This is done inside the Controller and works like this:
     gflash :error => { :value => "Custom error", :time => 3000, :class_name => "my_error_class", :sticky => false }
 
 When you don't pass a `:value` it uses the locale. Same goes for when you pass `true` to `:value`.
-
-You can also use gflash inside `js.erb` files:
-
-    <%= gflash :js => true %>
 
 You can also use gflash directly inside the `redirect_to` method.
 
