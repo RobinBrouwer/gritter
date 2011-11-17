@@ -4,4 +4,4 @@ Available generators:
 Examples:
   rails g gritter:locale
   This will create:
-    config/locales/gritter.en.yml
+    config/locales/gflash.en.yml
