@@ -35,7 +35,7 @@ And that's it!
 
 ## Changes
 
-Version 1.0.0 changes:
+Version 1.0.0 changes (17/11/2011):
 
     - Gritter now only works in Rails 3.1. You should check out the 'old' branch for other Rails versions.
     - Removed everything that isn't needed for Rails 3.1.
