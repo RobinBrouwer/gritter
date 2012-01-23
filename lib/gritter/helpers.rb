@@ -63,7 +63,7 @@ module Gritter
           end
         end
         session[:gflash] = nil
-        options[:js] ? flashes : js(flashes).html_safe
+        options[:js] ? flashes.join("\n") : js(flashes).html_safe
       end
     end
     

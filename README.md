@@ -1,6 +1,6 @@
 # gritter
 
-    version 1.0.0
+    version 1.0.1
     Robin Brouwer
     Daniël Zwijnenburg
     45north
@@ -17,7 +17,7 @@ Also check out that branch, because the newer version of gritter inside this gem
 
 You can use this gem by putting the following inside your Gemfile:
 
-    gem "gritter", "1.0.0"
+    gem "gritter", "1.0.1"
 
 Now generate the locale for gritter:
 
@@ -34,6 +34,10 @@ And the following to `/app/assets/stylesheets/application.css`:
 And that's it!
 
 ## Changes
+
+Version 1.0.1 changes (23/01/2012):
+    
+    - Fixed gflash(:js => true) in Ruby 1.9.2 and 1.9.3.
 
 Version 1.0.0 changes (17/11/2011):
 
