@@ -233,7 +233,20 @@ This is done inside the Controller and works like this:
     gflash :success => { :value => true, :time => 2000, :class_name => "my_class", :sticky => true }
     gflash :error => { :value => "Custom error", :time => 3000, :class_name => "my_error_class", :sticky => false }
 
-When you don't pass a `:value` it uses the locale. Same goes for when you pass `true` to `:value`.
+When you don't pass a `:value` it uses the locale. Same goes for when you pass `true` to `:value`. When you give `:value` a String, that String will be used to display the message. Here's another example:
+
+    def create
+      @user = User.new(params[:user])
+      if @user.save
+        gflash :success => { :value => "Account has been created!", :time => 5000 },
+               :notice => { :value => "You have received an e-mail notification.", :sticky => true }
+        redirect_to :root
+      else
+        gflash :error => { :value => "Something went wrong.", :time => 4000 },
+               :warning => { :value => "Some fields weren't filled in correctly.", :time => 7000 }
+        render :new
+      end
+    end
 
 You can also use gflash directly inside the `redirect_to` method.
 
