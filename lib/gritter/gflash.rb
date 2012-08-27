@@ -45,7 +45,7 @@ module Gritter
     
     def gflash_translation(key)
       i18n_key = "gflash.#{params[:controller]}.#{params[:action]}.#{key}"
-      I18n.t(i18n_key.gsub(/\//, "."), :default => i18n_key)
+      I18n.t(i18n_key.gsub(/\//, "."), :default => i18n_key.to_sym)
     end
   end
 end
