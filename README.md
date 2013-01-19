@@ -166,7 +166,7 @@ You can also use the `js` helper , add_gritter("Another one") to add script-tags
 
 ### Using `nodom_wrap` to change the JQuery code produced
 
-#### Default. (when nodom_wrap is not present)
+##### Default. (when nodom_wrap is not present)
 The  `add_gritter` helper produces a JQuery code as below.
 
 ```ruby
