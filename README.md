@@ -96,6 +96,8 @@ There are many more arguments you can pass to the helper:
     :after_open => "alert('Opened!');"     # => Execute javascript after opening.
     :before_close => "alert('Closing!');"  # => Execute javascript before closing.
     :after_close => "alert('Closed!');"    # => Execute javascript after closing.
+    :nodom_wrap  => true 		           # => Removes the DOM wrap on the produced JQuery code. Default, this argument
+                                                is false or not present, hence you always get a DOM wrap.
 
 The `:image` argument also allows you to easily set five different images:
 
@@ -160,7 +162,35 @@ The :position option accepts four different Symbols:
     :bottom_left
     :bottom_right
 
-You can also use the `js` helper to add script-tags around this helper.
+You can also use the `js` helper , add_gritter("Another one") to add script-tags around this helper.
+
+## JQuery code produced. ```:nodom_wrap```
+
+
+The add_gritter produces a JQuery code as below for the `add_gritter` helper call.
+
+ <%= add_gritter(:success, "See my notification")%>
+ 
+ ```js
+jQuery(function() { jQuery.gritter.add({image:'/assets/success.png',title:'Success',text:'The product has been created successfully!'}) });
+ 
+ ```
+ 
+ If you don't wanna wrap ''' jQuery.gritter.add({'' inside a ```jQuery(function()``` then include the argument :nodomwrap
+ 
+ <%= add_gritter(:success, "See my notification", :nodom_wrap => true )%>
+
+The following JQuery code will be produced.
+
+ ```js
+ jQuery.gritter.add({image:'/assets/success.png',title:'Success',text:'The product has been created successfully!'}); 
+```
+
+The argument can be included in ```gflash``` helper as well.
+
+```ruby
+gflash :success => { :value => "Account has been created!", :time => 5000, :nodom_wrap => true }
+```
 
 
 ### gflash
