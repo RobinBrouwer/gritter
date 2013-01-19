@@ -164,7 +164,7 @@ The :position option accepts four different Symbols:
 
 You can also use the `js` helper , add_gritter("Another one") to add script-tags around this helper.
 
-### JQuery code produced. ```:nodom_wrap```
+### JQuery code produced. `:nodom_wrap`
 
 
 The add_gritter produces a JQuery code as below for the `add_gritter` helper call.
@@ -179,22 +179,21 @@ jQuery(function() {
  
  ```
  
- If you don't wanna wrap ```jQuery.gritter.add({``` inside a ```jQuery(function()``` then include the argument ```:nodomwrap```
+ If you don't wanna wrap `jQuery.gritter.add({` inside a `jQuery(function()` then include the argument `:nodomwrap`
  
  <%= add_gritter(:success, "See my notification", :nodom_wrap => true )%>
 
-With ```:nodom_wrap``` included, the following JQuery code will be produced.
+With `:nodom_wrap` included, the following JQuery code will be produced.
 
  ```js
  jQuery.gritter.add({image:'/assets/success.png',title:'Success',text:'The product has been created successfully!'}); 
 ```
 
-The argument can be included in ```gflash``` helper as well.
+The argument can be included in `gflash` helper as well.
 
 ```ruby
 gflash :success => { :value => "Account has been created!", :time => 5000, :nodom_wrap => true }
 ```
-
 
 
 ### gflash
