@@ -167,7 +167,7 @@ You can also use the `js` helper , add_gritter("Another one") to add script-tags
 ### JQuery code produced
 
 
-The add_gritter produces a JQuery code as below for the `add_gritter` helper call.
+The  `add_gritter` helper produces a JQuery code as below for the call.
 
 ```ruby
  <%= add_gritter(:success, "See my notification")%>
@@ -179,11 +179,12 @@ jQuery(function() {
 	})
 });
  
- ```
  
  ```nodom_wrap```
  
  If you don't wanna wrap `jQuery.gritter.add({` inside a `jQuery(function()` then include the argument `:nodomwrap`
+
+ The modified `add_gritter` helper with `nodom_wrap` is
  
  ```ruby
  <%= add_gritter(:success, "See my notification", :nodom_wrap => true )%>
@@ -202,6 +203,11 @@ The argument can be included in `gflash` helper as well.
 
 ```ruby
 gflash :success => { :value => "Account has been created!", :time => 5000, :nodom_wrap => true }
+
+redirect_to signin_path(@user), :gflash => 
+{ :success => { :value => "Welcome back #{@user.first_name}. 
+Your email #{@user.email} is verified. Thank you.", :sticky => false, :nodom_wrap => true } }
+
 ```
 
 
