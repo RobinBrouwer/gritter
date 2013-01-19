@@ -96,6 +96,8 @@ There are many more arguments you can pass to the helper:
     :after_open => "alert('Opened!');"     # => Execute javascript after opening.
     :before_close => "alert('Closing!');"  # => Execute javascript before closing.
     :after_close => "alert('Closed!');"    # => Execute javascript after closing.
+    :nodom_wrap  => true 		           # => Removes the DOM wrap on the produced JQuery code. Default, this argument
+                                                is false or not present, hence you always get a DOM wrap.
 
 The `:image` argument also allows you to easily set five different images:
 
@@ -160,7 +162,53 @@ The :position option accepts four different Symbols:
     :bottom_left
     :bottom_right
 
-You can also use the `js` helper to add script-tags around this helper.
+You can also use the `js` helper , add_gritter("Another one") to add script-tags around this helper.
+
+### Using `nodom_wrap` to change the JQuery code produced
+
+##### Default. (when nodom_wrap is not present)
+The  `add_gritter` helper produces a JQuery code as below.
+
+```ruby
+ <%= add_gritter(:success, "See my notification")%>
+```
+ 
+ ```js
+jQuery(function() { 
+	jQuery.gritter.add({image:'/assets/success.png',title:'Success',text:'See my notification'
+	})
+});
+```
+ 
+##### nodom_wrap
+ 
+ If you don't wanna wrap `jQuery.gritter.add({` inside a `jQuery(function()` then include the argument `:nodomwrap`
+
+ The modified `add_gritter` helper with `nodom_wrap` is
+ 
+ ```ruby
+ <%= add_gritter(:success, "See my notification", :nodom_wrap => true )%>
+```
+
+With `:nodom_wrap` included, the following JQuery code will be produced.
+
+ ```js
+ jQuery.gritter.add({image:'/assets/success.png',
+ title:'Success',
+ text:'The product has been created successfully!'
+ }); 
+```
+
+The argument can be included in `gflash` helper as well.
+
+```ruby
+gflash :success => { :value => "Account has been created!", :time => 5000, :nodom_wrap => true }
+
+redirect_to signin_path(@user), :gflash => 
+{ :success => { :value => "Welcome back #{@user.first_name}. 
+Your email #{@user.email} is verified. Thank you.", :sticky => false, :nodom_wrap => true } }
+
+```
 
 
 ### gflash

@@ -2,3 +2,4 @@
 gritter*.gem
 .bundle
 pkg
+.project
