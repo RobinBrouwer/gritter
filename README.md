@@ -169,7 +169,9 @@ You can also use the `js` helper , add_gritter("Another one") to add script-tags
 
 The add_gritter produces a JQuery code as below for the `add_gritter` helper call.
 
+```ruby
  <%= add_gritter(:success, "See my notification")%>
+```
  
  ```js
 jQuery(function() { 
