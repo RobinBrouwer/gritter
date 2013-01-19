@@ -164,10 +164,10 @@ The :position option accepts four different Symbols:
 
 You can also use the `js` helper , add_gritter("Another one") to add script-tags around this helper.
 
-### JQuery code produced
+### Using `nodom_wrap` to change the JQuery code produced
 
-
-The  `add_gritter` helper produces a JQuery code as below for the call.
+#### Default. (when nodom_wrap is not present)
+The  `add_gritter` helper produces a JQuery code as below.
 
 ```ruby
  <%= add_gritter(:success, "See my notification")%>
@@ -178,9 +178,9 @@ jQuery(function() {
 	jQuery.gritter.add({image:'/assets/success.png',title:'Success',text:'See my notification'
 	})
 });
+```
  
- 
- ```nodom_wrap```
+####nodom_wrap
  
  If you don't wanna wrap `jQuery.gritter.add({` inside a `jQuery(function()` then include the argument `:nodomwrap`
 
