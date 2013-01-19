@@ -18,7 +18,7 @@ module Gritter
       notification.push("title:'#{escape_javascript(options[:title])}',")
       notification.push("text:'#{escape_javascript(text)}'")
       notification.push("});")
-      notification.push("});") if !options[:dom_wrap].present?          
+      notification.push("});") if !options[:nodom_wrap].present?          
       text.present? ? notification.join.html_safe : nil
     end
     
