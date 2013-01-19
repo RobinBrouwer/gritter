@@ -5,7 +5,7 @@ module Gritter
       options[:title] = "Notification" if options[:title].blank?
       options[:image] = asset_path("#{options[:image]}#{options[:image] == 'progress' ? '.gif' : '.png'}") if %w(success warning error notice progress).include?(options[:image].to_s)
       notification = Array.new    
-      notification.push("jQuery(function(){") if !options[:dom_wrap].present?
+      notification.push("jQuery(function(){") if !options[:nodom_wrap].present?
       notification.push("jQuery.gritter.add({")
       notification.push("image:'#{options[:image]}',") if options[:image].present?
       notification.push("sticky:#{options[:sticky]},") if options[:sticky].present?
@@ -18,7 +18,6 @@ module Gritter
       notification.push("title:'#{escape_javascript(options[:title])}',")
       notification.push("text:'#{escape_javascript(text)}'")
       notification.push("});")
-      puts notification
       notification.push("});") if !options[:dom_wrap].present?          
       text.present? ? notification.join.html_safe : nil
     end
