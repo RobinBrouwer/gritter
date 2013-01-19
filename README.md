@@ -180,7 +180,7 @@ jQuery(function() {
 });
 ```
  
-####nodom_wrap
+##### nodom_wrap
  
  If you don't wanna wrap `jQuery.gritter.add({` inside a `jQuery(function()` then include the argument `:nodomwrap`
 
