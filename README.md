@@ -1,6 +1,6 @@
 # gritter
 
-    version 1.0.2
+    version 1.0.3
     Robin Brouwer
     Daniël Zwijnenburg
     45north
@@ -17,7 +17,7 @@ Also check out that branch, because the newer version of gritter inside this gem
 
 You can use this gem by putting the following inside your Gemfile:
 
-    gem "gritter", "1.0.2"
+    gem "gritter", "1.0.3"
 
 Now generate the locale for gritter:
 
@@ -34,6 +34,10 @@ And the following to `/app/assets/stylesheets/application.css`:
 And that's it!
 
 ## Changes
+
+Version 1.0.3 changes (26/01/2013):
+    
+    - :nodom_wrap added by indykish
 
 Version 1.0.2 changes (03/09/2012):
     
