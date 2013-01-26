@@ -164,52 +164,6 @@ The :position option accepts four different Symbols:
 
 You can also use the `js` helper , add_gritter("Another one") to add script-tags around this helper.
 
-### Using `nodom_wrap` to change the JQuery code produced
-
-##### Default. (when nodom_wrap is not present)
-The  `add_gritter` helper produces a JQuery code as below.
-
-```ruby
- <%= add_gritter(:success, "See my notification")%>
-```
- 
- ```js
-jQuery(function() { 
-	jQuery.gritter.add({image:'/assets/success.png',title:'Success',text:'See my notification'
-	})
-});
-```
- 
-##### nodom_wrap
- 
- If you don't wanna wrap `jQuery.gritter.add({` inside a `jQuery(function()` then include the argument `:nodomwrap`
-
- The modified `add_gritter` helper with `nodom_wrap` is
- 
- ```ruby
- <%= add_gritter(:success, "See my notification", :nodom_wrap => true )%>
-```
-
-With `:nodom_wrap` included, the following JQuery code will be produced.
-
- ```js
- jQuery.gritter.add({image:'/assets/success.png',
- title:'Success',
- text:'The product has been created successfully!'
- }); 
-```
-
-The argument can be included in `gflash` helper as well.
-
-```ruby
-gflash :success => { :value => "Account has been created!", :time => 5000, :nodom_wrap => true }
-
-redirect_to signin_path(@user), :gflash => 
-{ :success => { :value => "Welcome back #{@user.first_name}. 
-Your email #{@user.email} is verified. Thank you.", :sticky => false, :nodom_wrap => true } }
-
-```
-
 
 ### gflash
 
@@ -315,6 +269,53 @@ You can also use gflash directly inside the `redirect_to` method.
     end
 
 And that's how you add gflash to your Rails application!
+
+
+### Using `nodom_wrap` to change the JQuery code produced
+
+##### Default. (when nodom_wrap is not present)
+The `add_gritter` helper produces JQuery code as shown below.
+
+```ruby
+<%= add_gritter(:success, "See my notification")%>
+```
+
+```js
+jQuery(function() { 
+  jQuery.gritter.add({image:'/assets/success.png',title:'Success',text:'See my notification'})
+});
+```
+
+##### nodom_wrap
+
+If you don't want to wrap `jQuery.gritter.add({` inside a `jQuery(function()` then include the argument `:nodom_wrap`
+
+The modified `add_gritter` helper with `nodom_wrap` looks like this:
+ 
+```ruby
+<%= add_gritter(:success, "See my notification", :nodom_wrap => true )%>
+```
+
+With `:nodom_wrap` included, the following JQuery code will be produced.
+
+```js
+jQuery.gritter.add({
+  image: '/assets/success.png',
+  title: 'Success',
+  text: 'The product has been created successfully!'
+}); 
+```
+
+The argument can be included in `gflash` helper as well.
+
+```ruby
+gflash :success => { :value => "Account has been created!", :time => 5000, :nodom_wrap => true }
+
+redirect_to signin_path(@user), :gflash => 
+{ :success => { :value => "Welcome back #{@user.first_name}. 
+Your email #{@user.email} is verified. Thank you.", :sticky => false, :nodom_wrap => true } }
+```
+
 
 ## Copyright
 
