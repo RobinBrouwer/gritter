@@ -205,7 +205,8 @@ You can also use the `js` helper , add_gritter("Another one") to add script-tags
 ### gflash
 
 The `gflash` helper is a different kind of `flash[:notice]` message. It uses the `add_gritter` helper and the default images used in this gem.
-It saves the messages in `session[:gflash]`. It also saves the messages inside the Rails flash messages (`flash` and `flash.now`).
+It saves the messages in `session[:gflash]`. It can also save the messages inside the default Rails flash messages (`flash` and `flash.now`). 
+To do this, you have to add the following to an initializer: `Gritter.rails_flash_fallback = true`.
 
 Add the following inside your controller action:
 
