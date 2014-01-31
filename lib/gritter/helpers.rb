@@ -3,7 +3,7 @@ module Gritter
     def add_gritter text, *args
       options = args.extract_options!
       options[:title] = "Notification" if options[:title].blank?
-      options[:image] = asset_path("#{options[:image]}#{options[:image] == 'progress' ? '.gif' : '.png'}") if %w(success warning error notice progress).include?(options[:image].to_s)
+      options[:image] = asset_path("#{options[:image]}#{options[:image].to_s == 'progress' ? '.gif' : '.png'}") if %w(success warning error notice progress).include?(options[:image].to_s)
       notification = Array.new
       notification.push("jQuery(function(){") if !options[:nodom_wrap].present?
       notification.push("jQuery.gritter.add({")
