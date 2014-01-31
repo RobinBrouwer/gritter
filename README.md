@@ -36,7 +36,7 @@ And that's it!
 
 Version 1.1.0 changes (31/01/2013):
     
-    - All gflash messages are also stored in the Rails flash messages.
+    - All gflash messages can also be stored in the Rails flash messages (optional).
     - Added i18n interpolation for gflash messages.
     - Added default values for the gflash messages.
     - Fixed several other issues.
@@ -275,7 +275,7 @@ Here you can set the locales for all your gflash messages and the titles. It wor
           progress: "Progress"
         products: # => Controller name
           create: # => Action name
-            notice: "Custom notice message"
+            notice: "Custom notice message"case
 
 It's also possible to add default gflash messages.
 
