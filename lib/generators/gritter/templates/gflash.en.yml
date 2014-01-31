@@ -10,6 +10,14 @@ en:
       error: "Error"
       progress: "Progress"
     #
+    # Add default gflash messages:
+    # defaults:
+    #   success: "This is a notification"
+    #   error: "Something went wrong"
+    #   create:
+    #     success: "Successfully created!"
+    #     error: "Something went wrong. Please take a look at the form to see what went wrong."
+    #
     # Add gflash messages for controller actions:
     # products:
     #   create:

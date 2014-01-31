@@ -5,7 +5,7 @@ module Gritter
       options[:title] = "Notification" if options[:title].blank?
       options[:image] = asset_path("#{options[:image]}#{options[:image].to_s == 'progress' ? '.gif' : '.png'}") if %w(success warning error notice progress).include?(options[:image].to_s)
       notification = Array.new
-      notification.push("jQuery(function(){") if !options[:nodom_wrap].present?
+      notification.push("jQuery(function(){") if options[:nodom_wrap].blank?
       notification.push("jQuery.gritter.add({")
       notification.push("image:'#{options[:image]}',") if options[:image].present?
       notification.push("sticky:#{options[:sticky]},") if options[:sticky].present?
@@ -18,7 +18,7 @@ module Gritter
       notification.push("title:'#{escape_javascript(options[:title])}',")
       notification.push("text:'#{escape_javascript(text)}'")
       notification.push("});")
-      notification.push("});") if !options[:nodom_wrap].present?
+      notification.push("});") if options[:nodom_wrap].blank?
       text.present? ? notification.join.html_safe : nil
     end
     
@@ -48,18 +48,20 @@ module Gritter
     def gflash *args
       if session[:gflash].present?
         options = args.extract_options!
+        nodom_wrap = options[:nodom_wrap]
+        options.delete(:nodom_wrap)
+        
         titles = gflash_titles(options)
         flashes = []
         session[:gflash].each do |key, value|
           value.each do |gflash_value|
-            gritter_options = { :image => key, :title => titles[key] }
+            gritter_options = { :image => key, :title => titles[key], :nodom_wrap => nodom_wrap }
             if gflash_value.is_a?(Hash)
               text = gflash_value.has_key?(:value) ? (gflash_value[:value] and gflash_value.delete(:value)) : nil
               gritter_options.merge!(gflash_value)
             else
               text = gflash_value
             end
-            
             flashes.push(add_gritter(text, gritter_options))
           end
         end

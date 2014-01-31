@@ -8,7 +8,7 @@ This Ruby on Rails gem allows you to easily add Growl-like notifications to your
 
 ## Note
 
-This is a Rails 3.1 gem. Are you using Rails 3.0 or lower? Check out [the 'old' branch on Github](https://github.com/RobinBrouwer/gritter/tree/old). Want support for IE6? 
+Are you using Rails 3.0 or lower? Check out [the 'old' branch on Github](https://github.com/RobinBrouwer/gritter/tree/old). Want support for IE6? 
 Also check out that branch, because the newer version of gritter inside this gem dropped support for it.
 
 
@@ -16,7 +16,7 @@ Also check out that branch, because the newer version of gritter inside this gem
 
 You can use this gem by putting the following inside your Gemfile:
 
-    gem "gritter", "1.0.3"
+    gem "gritter", "1.1.0"
 
 Now generate the locale for gritter:
 
@@ -33,6 +33,14 @@ And the following to `/app/assets/stylesheets/application.css`:
 And that's it!
 
 ## Changes
+
+Version 1.1.0 changes (31/01/2013):
+    
+    - Added retina support for the images.
+    - All gflash messages are also stored in the Rails flash messages.
+    - Added i18n interpolation for gflash messages.
+    - Added default values for the gflash messages.
+    - Fixed several other issues.
 
 Version 1.0.3 changes (26/01/2013):
     
@@ -170,18 +178,29 @@ You can also use the `js` helper , add_gritter("Another one") to add script-tags
 
 ### gflash
 
-The `gflash` helper is a different kind of `flash[:notice]` message. It uses the `add_gritter` helper and the default images used in this plugin.
-It uses a session to remember the flash messages. Add the following inside your controller action:
+The `gflash` helper is a different kind of `flash[:notice]` message. It uses the `add_gritter` helper and the default images used in this gem.
+It saves the messages in `session[:gflash]`. It also saves the messages inside the Rails flash messages (`flash` and `flash.now`).
+
+Add the following inside your controller action:
 
     def create
-      gflash :success => "The product has been created successfully!"
+      @product = Product.new(product_params)
+      if @product.save
+        gflash :success => "The product has been created successfully!"
+        redirect_to(@product)
+      else
+        gflash :now, :error => "Something went wrong."
+        render("new")
+      end
     end
+
+You can add `:now` to add the flash message to `flash.now` as well.
 
 Now you can add the following to your layout view inside the body-tag:
 
     <%= gflash %>
 
-The flash-message will be shown with 'success.png' as the image and 'Success' as the title.
+The flash-message will be shown with 'success.png' as the image and 'Success' as the title when the product is saved.
 To change the title you can add the following to the `gflash` helper inside the layout:
 
     <%= gflash :success => "It has been successful!" %>
@@ -205,7 +224,7 @@ Each uses the corresponding image and title. You can also add multiple gritter n
     end
 
 Besides passing the exact text inside the controller, gflash also supports locales (both for messages and titles). 
-When you start your server a new locale file will be added to /config/locales called `gflash.en.yml`.
+You can generate `gflash.en.yml` by using the following command: `rails g gritter:locale`.
 Here you can set the locales for all your gflash messages and the titles. It works like this:
 
     en:
@@ -219,6 +238,17 @@ Here you can set the locales for all your gflash messages and the titles. It wor
         products: # => Controller name
           create: # => Action name
             notice: "Custom notice message"
+
+It's also possible to add default gflash messages.
+
+    en:
+      gflash:
+        defaults:
+          success: "This is a notification"
+          error: "Something went wrong"
+          create:
+            success: "Successfully created!"
+            error: "Something went wrong. Please take a look at the form to see what went wrong."
 
 Now you can do the following inside your Controller:
 
@@ -271,21 +301,32 @@ You can also use gflash directly inside the `redirect_to` method.
       redirect_to :login, :gflash => { :error => { :value => "You are not logged in!", :sticky => true } }
     end
 
+You can use i18n interpolation like this:
+
+    redirect_to :root, :flash => { :success => true, :locals => { :name => @user.name, :email => @user.email } }
+    gflash :success, :info, :locals => { :name => @user.name, :email => @user.email }
+    gflash :success, :info => { :locals => { :name => @user.name, :email => @user.email } }
+
+Inside `gflash.en.yml` you can do the following:
+
+    success: "Welcome, %{name}."
+    info: "Your e-mail address has been changed to: %{email}."
+
 And that's how you add gflash to your Rails application!
 
 
-### Using `nodom_wrap` to change the JQuery code produced
+### Using `nodom_wrap` to change the jQuery code produced
 
-##### Default. (when nodom_wrap is not present)
+##### Default (when nodom_wrap is not present)
 The `add_gritter` helper produces JQuery code as shown below.
 
 ```ruby
-<%= add_gritter(:success, "See my notification")%>
+<%= add_gritter(:success, "See my notification") %>
 ```
 
 ```js
 jQuery(function() { 
-  jQuery.gritter.add({image:'/assets/success.png',title:'Success',text:'See my notification'})
+  jQuery.gritter.add({ image: '/assets/success.png', title: 'Success', text: 'See my notification' });
 });
 ```
 
@@ -311,14 +352,9 @@ jQuery.gritter.add({
 
 The argument can be included in `gflash` helper as well.
 
-```ruby
-gflash :success => { :value => "Account has been created!", :time => 5000, :nodom_wrap => true }
-
-redirect_to signin_path(@user), :gflash => 
-{ :success => { :value => "Welcome back #{@user.first_name}. 
-Your email #{@user.email} is verified. Thank you.", :sticky => false, :nodom_wrap => true } }
-```
-
+    ```ruby
+    gflash :nodom_wrap => true
+    ```
 
 ## Copyright
 
