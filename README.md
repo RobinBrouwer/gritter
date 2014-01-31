@@ -36,7 +36,6 @@ And that's it!
 
 Version 1.1.0 changes (31/01/2013):
     
-    - Added retina support for the images.
     - All gflash messages are also stored in the Rails flash messages.
     - Added i18n interpolation for gflash messages.
     - Added default values for the gflash messages.
