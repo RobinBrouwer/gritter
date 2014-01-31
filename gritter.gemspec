@@ -6,9 +6,9 @@ Gem::Specification.new do |s|
   s.name        = "gritter"
   s.version     = Gritter::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Robin Brouwer", "Daniël Zwijnenburg"]
-  s.email       = ["robin@45north.nl"]
-  s.homepage    = "http://www.45north.nl"
+  s.authors     = ["Robin Brouwer"]
+  s.email       = ["robin@montblanc.nl"]
+  s.homepage    = "http://www.montblanc.nl"
   s.summary     = %q{Growl notifications for your Rails application.}
   s.description = %q{This Ruby on Rails gem allows you to easily add Growl-like notifications to your application using a jQuery plugin called 'gritter'.}
   
