@@ -114,8 +114,8 @@ There are many more arguments you can pass to the helper:
 :after_open => "alert('Opened!');"     # => Execute javascript after opening.
 :before_close => "alert('Closing!');"  # => Execute javascript before closing.
 :after_close => "alert('Closed!');"    # => Execute javascript after closing.
-:nodom_wrap  => true 		               # => Removes the DOM wrap on the produced JQuery code. Default, this argument
-                                            is false or not present, hence you always get a DOM wrap.
+:nodom_wrap  => true                   # => Removes the DOM wrap on the produced JQuery code. Default, this argument
+                                       #    is false or not present, hence you always get a DOM wrap.
 ```
 
 The `:image` argument also allows you to easily set five different images:
