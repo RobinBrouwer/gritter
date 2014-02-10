@@ -111,6 +111,7 @@ There are many more arguments you can pass to the helper:
 :class_name => "gritter"               # => Allows you to set a different classname.
 :before_open => "alert('Opening!');"   # => Execute javascript before opening.
 :after_open => "alert('Opened!');"     # => Execute javascript after opening.
+:on_clcik => "alert('Clicked!');"      # => Execute javascript on click( Will not work on clicking close button).
 :before_close => "alert('Closing!');"  # => Execute javascript before closing.
 :after_close => "alert('Closed!');"    # => Execute javascript after closing.
 :nodom_wrap  => true                   # => Removes the DOM wrap on the produced JQuery code. Default, this argument

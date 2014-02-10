@@ -186,7 +186,7 @@ window.Modernizr = function (a, b, c) {
         tmp = this._tpl_item;
       
       // Assign callbacks
-      $(['before_open', 'after_open', 'before_close', 'after_close']).each(function(i, val){
+      $(['before_open', 'after_open', 'before_close', 'after_close','on_click']).each(function(i, val){
         Gritter['_' + val + '_' + number] = ($.isFunction(params[val])) ? params[val] : function(){}
       });
 
@@ -219,6 +219,27 @@ window.Modernizr = function (a, b, c) {
       if(!sticky){
         this._setFadeTimer(item, number);
       }
+
+      // Add on_click listener
+      $(item).click(function(){
+        Gritter['_' + 'on_click' + '_' + number]($(this));
+      });
+    
+      /**  
+         *  In order to avoid conflicts between on_click and before/after_close 
+         *  Disable on_click event when hover over close button
+         *  Enable on_click event on mouse leave
+      */
+      $(item).find('.gritter-close').bind('mouseenter mouseleave', function(event){
+        if(event.type == 'mouseenter'){
+            $(item).off("click");        
+        }
+        else {
+            $(item).on("click",function(){
+                Gritter['_' + 'on_click' + '_' + number]($(this));
+            });        
+        }
+      });
       
       // Bind the hover/unhover states
       $(item).bind('mouseenter mouseleave', function(event){
