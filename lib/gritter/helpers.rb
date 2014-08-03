@@ -21,7 +21,7 @@ module Gritter
       notification.push("});") if options[:nodom_wrap].blank?
       text.present? ? notification.join.html_safe : nil
     end
-    
+
     def remove_gritter *args
       options = args.extract_options!
       removed = ["jQuery.gritter.removeAll({"]
@@ -30,7 +30,7 @@ module Gritter
       removed.push("});")
       removed.join.html_safe
     end
-    
+
     def extend_gritter *args
       options = args.extract_options!
       options[:fade_in_speed] = "'#{options[:fade_in_speed]}'" if options[:fade_in_speed].is_a?(String)
@@ -44,13 +44,13 @@ module Gritter
       extended.push("});")
       extended.join.html_safe
     end
-    
+
     def gflash *args
       if session[:gflash].present?
         options = args.extract_options!
         nodom_wrap = options[:nodom_wrap]
         options.delete(:nodom_wrap)
-        
+
         titles = gflash_titles(options)
         flashes = []
         session[:gflash].each do |key, value|
@@ -66,16 +66,16 @@ module Gritter
           end
         end
         session[:gflash] = nil
-        options[:js] ? flashes.join("\n") : js(flashes).html_safe
+        options[:js] ? flashes.join("\n").html_safe : js(flashes).html_safe
       end
     end
-    
+
     def js *args
       javascript_tag(args.join("\n"))
     end
-    
+
     private
-    
+
     def gflash_titles *args
       options = args.extract_options!
       titles = { :success => get_translation(:success), :warning => get_translation(:warning), :error => get_translation(:error), :notice => get_translation(:notice), :progress => get_translation(:progress) }
@@ -84,7 +84,7 @@ module Gritter
       end
       titles
     end
-    
+
     def get_translation translation
       I18n.t(translation, :scope => [:gflash, :titles])
     end
