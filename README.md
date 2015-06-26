@@ -331,7 +331,7 @@ def create
     render :new
   end
 end
-```ruby
+```
 
 You can also use gflash directly inside the `redirect_to` method.
 
