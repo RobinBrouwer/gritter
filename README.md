@@ -34,6 +34,10 @@ And that's it!
 
 ## Changes
 
+Version 1.1.1 changes (12/07/2015):
+
+    - Support Rails 4.x.
+
 Version 1.1.0 changes (31/01/2013):
     
     - All gflash messages can also be stored in the Rails flash messages (optional).
