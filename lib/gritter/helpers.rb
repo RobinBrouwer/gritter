@@ -15,6 +15,7 @@ module Gritter
       notification.push("after_open:function(e){#{options[:after_open]}},") if options[:after_open].present?
       notification.push("before_close:function(e){#{options[:before_close]}},") if options[:before_close].present?
       notification.push("after_close:function(e){#{options[:after_close]}},") if options[:after_close].present?
+      notification.push("on_click:function(e){#{options[:on_click]}},") if options[:on_click].present?
       notification.push("title:'#{escape_javascript(options[:title])}',")
       notification.push("text:'#{escape_javascript(text)}'")
       notification.push("});")
