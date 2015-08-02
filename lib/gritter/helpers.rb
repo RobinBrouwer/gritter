@@ -57,7 +57,7 @@ module Gritter
         session[:gflash].each do |key, value|
           key = key.to_sym
           value.each do |gflash_value|
-            gritter_options = { :image => key, :title => titles[key], :nodom_wrap => nodom_wrap }
+            gritter_options = { :image => key, :title => titles[key.to_sym], :nodom_wrap => nodom_wrap }
             if gflash_value.is_a?(Hash)
               text = gflash_value.has_key?(:value) ? (gflash_value[:value] and gflash_value.delete(:value)) : nil
               gritter_options.merge!(gflash_value)
