@@ -3,7 +3,7 @@ module Gritter
     def add_gritter text, *args
       options = args.extract_options!
       options[:title] = "Notification" if options[:title].blank?
-      options[:image] = asset_path("#{options[:image]}#{options[:image].to_s == 'progress' ? '.gif' : '.png'}") if %w(success warning error notice progress).include?(options[:image].to_s)
+      options[:image] = image_path("#{options[:image]}#{options[:image].to_s == 'progress' ? '.gif' : '.png'}") if %w(success warning error notice progress).include?(options[:image].to_s)
       notification = Array.new
       notification.push("jQuery(function(){") if options[:nodom_wrap].blank?
       notification.push("jQuery.gritter.add({")
@@ -55,6 +55,7 @@ module Gritter
         titles = gflash_titles(options)
         flashes = []
         session[:gflash].each do |key, value|
+          key = key.to_sym
           value.each do |gflash_value|
             gritter_options = { :image => key, :title => titles[key], :nodom_wrap => nodom_wrap }
             if gflash_value.is_a?(Hash)

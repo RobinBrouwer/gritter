@@ -1,8 +1,7 @@
 # gritter
 
-    version 1.1.0
+    version 1.2.0
     Robin Brouwer
-    montblanc
 
 This Ruby on Rails gem allows you to easily add Growl-like notifications to your application using a jQuery plugin called 'gritter'. [Check out the demo for this plugin](http://boedesign.com/demos/gritter/).
 
@@ -16,7 +15,7 @@ Also check out that branch, because the newer version of gritter inside this gem
 
 You can use this gem by putting the following inside your Gemfile:
 
-    gem "gritter", "1.1.0"
+    gem "gritter", "1.2.0"
 
 Now generate the locale for gritter:
 
@@ -33,6 +32,11 @@ And the following to `/app/assets/stylesheets/application.css`:
 And that's it!
 
 ## Changes
+
+Version 1.2.0 changes (02/08/2015):
+    
+    - Added Rails 4 support.
+    - Added on_click support.
 
 Version 1.1.0 changes (31/01/2013):
     
@@ -332,7 +336,7 @@ def create
     render :new
   end
 end
-```ruby
+```
 
 You can also use gflash directly inside the `redirect_to` method.
 
