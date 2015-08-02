@@ -10,7 +10,7 @@
  */
 
 // Modernizr for CSS3 support check.
-window.Modernizr = function (a, b, c) {
+window.GritterModernizr = function (a, b, c) {
    function A(a, b) {
        var c = a.charAt(0).toUpperCase() + a.substr(1),
            d = (a + " " + m.join(c + " ") + c).split(" ");
@@ -127,7 +127,7 @@ window.Modernizr = function (a, b, c) {
   */
   var gritter_item;
   var gritter_content = '[[close]][[image]]<div class="[[class_name]]"><span class="gritter-title">[[username]]</span><p>[[text]]</p></div><div style="clear:both"></div>';
-  if(Modernizr.borderradius && Modernizr.rgba) {
+  if(GritterModernizr.borderradius && GritterModernizr.rgba) {
     gritter_item = '<div class="gritter-item gritter-css3">'+ gritter_content +'</div>';
   } else {
     gritter_item = '<div class="gritter-top"></div><div class="gritter-item gritter-css2">'+ gritter_content +'</div><div class="gritter-bottom"></div>';    
