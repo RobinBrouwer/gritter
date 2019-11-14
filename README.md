@@ -11,17 +11,17 @@ Are you using Rails 3.0 or lower? Check out [the 'old' branch on Github](https:/
 Also check out that branch, because the newer version of gritter inside this gem dropped support for it.
 If you are Using Rails 6 you should add manually the JS and SCSS to your path
 
-**## Installation For Rails 6**
-Add gritter.js and gritter.scss to your packs , Do not forget to add images folder to your packs too
-Add this to your application.js :
-    ```
+## Installation For Rails 6
+**Add gritter.js and gritter.scss to your packs .
+  Do not forget to add images folder to your packs too. **
+  Add this line to your application.js :
+    
     import 'gritter';
-    ```
+    
 Add this to your application.scss :
-    ```
+    
     @import 'gritter';
-    ```
-And that's it!
+
 
 ## Installation For Rails 4
 
