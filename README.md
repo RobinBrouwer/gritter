@@ -9,9 +9,17 @@ This Ruby on Rails gem allows you to easily add Growl-like notifications to your
 
 Are you using Rails 3.0 or lower? Check out [the 'old' branch on Github](https://github.com/RobinBrouwer/gritter/tree/old). Want support for IE6? 
 Also check out that branch, because the newer version of gritter inside this gem dropped support for it.
+If you are Using Rails 6 you should add manually the JS and SCSS to your path
 
+## Installation For Rails 6
+Add gritter.js and gritter.scss to your packs , Do not forget to add images folder to your packs too
+Add this to your application.js :
+    import 'gritter';
+Add this to your application.scss :
+    @import 'gritter';
+And that's it!
 
-## Installation
+## Installation For Rails 4
 
 You can use this gem by putting the following inside your Gemfile:
 
@@ -37,7 +45,8 @@ Version 1.2.0 changes (02/08/2015):
     
     - Added Rails 4 support.
     - Added on_click support.
-
+    - Added Rails 6 support .
+    - Fix style problems .
 Version 1.1.0 changes (31/01/2013):
     
     - All gflash messages can also be stored in the Rails flash messages (optional).
